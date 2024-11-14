@@ -7,3 +7,9 @@ def master(request):
     
 def home_page(request):
     return render(request, 'home-page.html')
+
+def sign_in(request):
+    return render(request, 'sign_in.html')
+
+def sign_up(request):
+    return render(request, 'sign_up.html')
