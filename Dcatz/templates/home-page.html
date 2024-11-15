@@ -1,4 +1,5 @@
 {% extends 'master.html' %}
+{% load static %}
 
 {% block title %}
 Home Page
@@ -8,6 +9,7 @@ Home Page
 {% endblock %}
 
 {% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'home.css' %}">
 <section class="sub-picks-section">
     <div class="sub-picks">
         <ul class="sub-picks-list">
@@ -40,12 +42,12 @@ Home Page
     </div>
 
     <div class="bottom-dots">
-        <!-- <ul class="bottom-dots-ul">
+        <ul class="bottom-dots-ul">
             <li></li>
             <li></li>
             <li></li>
             <li></li>
-        </ul> -->
+        </ul>
     </div>
 <!-- </section> -->
 
