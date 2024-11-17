@@ -1,0 +1,128 @@
+{% extends "master.html" %}
+
+{% load static %}
+
+{% block title %}Sign up{% endblock %}
+
+{% block content %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'sign_up.css' %}">
+</head>
+<body>
+
+ {% if messages %}
+    <div id="alert-container">
+        {% for message in messages %}
+            <div class="alert {% if message.tags == 'error' %}alert-danger{% else %}alert-success{% endif %}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+
+
+
+                                <!-- Heading -->
+<div class="Heading-container">
+<h2>D'catz</h2>
+</div>
+
+
+<div class="Main">
+
+<!--======= Left container =========-->
+<div class="Left-container">
+<!-- Heading -->
+    <h3>Welcome!</h3>
+
+    <h4>Cats are curious and independent<br>
+         They love to explore and nap in <br>
+         quiet spots. With soft fur and gentle purrs.
+    </h4>
+    
+    <button onclick="window.location.href='{% url 'home-page' %}'" id="Shop_now" type="button" name="shop_now">Shop Now</button>
+
+</div>
+
+
+<!--============== sign up form ito, ok na to, wag na galawin ====================-->
+<div class="Right-container">
+<div class="Form-container">
+<form method="POST">
+    {% csrf_token %}
+
+<!-- container -->
+
+    <!-- heading-->
+    <div class="Sign_up_parent">
+        <div id="Sign_up">Sign Up</div>
+      </div>
+      
+<!-- container -->
+    <div class="First_Last_name_container">
+    <div class="First_name">
+    <input type="text" placeholder="First Name" name="first_name" value="{{ request.POST.first_name }}" required><br>
+    </div>
+    <div class="Last_name">
+    <input  type="text"  placeholder="Last Name" name="last_name" value="{{ request.POST.last_name }}" required><br>
+    </div>
+    </div>
+
+
+
+  
+    <input type="text"  placeholder="Address" name="address" value="{{ request.POST.address }}" required><br>
+
+  
+    <input type="text"  pattern="^\d{11}$" placeholder="Number (11 digits)" name="number" value="{{ request.POST.number }}" required><br>
+
+    
+    <input type="text"  placeholder="Username" name="username" value="{{ request.POST.username }}" required><br>
+
+   
+    <input type="password"  placeholder="Password" name="password" required><br>
+
+    <button type="submit" name="sign_up">Sign Up</button>
+</form>
+
+<!--========= link pang sign in =====-->
+<p>Have an account? <a href="{% url 'sign_in' %}">Sign In</a></p>
+</div>
+</div>
+</div>
+
+
+
+<script>
+// ito ung message na pop up
+    window.onload = function() {
+       const alerts = document.querySelectorAll('.alert');
+        alerts.forEach(function(alert) {
+            alert.style.opacity = 1; // style o opacity
+            
+            setTimeout(function() {
+                alert.style.opacity = 0;
+            }, 3000); // oras to ng message
+        });
+    };
+
+// para sa number
+    document.getElementById('number').addEventListener('input', function(event) {
+        let value = this.value;
+        this.value = value.replace(/[^0-9]/g, '').slice(0, 11); 
+    });
+   
+    
+</script>
+
+</body>
+</html>
+{% endblock %}

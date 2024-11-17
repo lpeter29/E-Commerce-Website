@@ -1,0 +1,68 @@
+{% extends 'master.html' %}
+{% load static %}
+
+{% block title %}
+Home Page
+{% endblock %}
+
+{% block css %}
+{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'home.css' %}">
+<section class="sub-picks-section">
+    <div class="sub-picks">
+        <ul class="sub-picks-list">
+            <li>Accessories</li>
+            <li>Clothing</li>
+            <li>Furniture</li>
+            <li>Food</li>
+            <li>Toys</li>       
+        </ul>
+        <span>
+            <ul class="sub-picks-list">
+                <li>Promo</li>
+                <li>Free Shipping</li>
+                <li>10% Off Deals</li>
+            </ul>
+        </span>
+    </div>
+</section>
+
+<section class="search-section">
+    <div class="search-div">
+        <input type="text" name="search" id="search" class="search-bar">
+        <button class="search-button">Search</button>
+    </div>
+</section>
+
+<!-- <section class="main-banner-section"> -->
+    <div class="main-banner">
+
+    </div>
+
+    <div class="bottom-dots">
+        <ul class="bottom-dots-ul">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+<!-- </section> -->
+
+<!-- <section class="top-products-section"> -->
+    <div class="top-products-div">
+        <h2>Top Products</h2>
+        <div class="top-products-selection">
+            <!-- for 5 items in models -->
+            <div class="product-info">
+
+            </div>
+            <!-- endfor -->
+        </div>
+    </div>
+<!-- </section> --> 
+
+{% endblock %}
+

@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'master.css' %}">
+    <title>{% block title %} {% endblock %}</title>
+</head>
+
+<body>
+    <nav class="nav-bar">
+        <header>
+            <h1>D'Catz</h1>
+            <span class="cart-fav-buttons">
+                <div class="cart"></div>
+                <div class="favorites"></div>
+            </span>
+        </header>
+    </nav>
+
+    {% block content %}
+    {% endblock %}
+
+    <footer class="footer">
+            <ul>
+                <li>Need Help?</li>
+                <li>Terms of Service</li>
+                <li>Privacy & Policy</li>
+            </ul>
+    </footer>
+</body>
+</html>

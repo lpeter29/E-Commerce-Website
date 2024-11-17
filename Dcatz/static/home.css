@@ -1,0 +1,92 @@
+/* <---------------------------------- CSS FOR home-page.html ----------------------------------> */
+div.sub-picks {
+    margin-left: 5%;
+    color: white;
+    margin-top: 10px;
+}
+
+div.sub-picks, ul {
+    list-style-type: none;
+    display: flex;
+    gap: 20px; 
+    font-family: 'Roboto', sans-serif;
+    letter-spacing: 0.5px;
+    > span {
+        border-left: 2px solid white;
+        margin-left: 20px;
+    }
+}
+
+div.search-div {
+    /* border: 1px solid white; */
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    > input {
+        width: 40%;
+        font-size: 35px;    
+        border-top-left-radius: 30px;
+        border-bottom-left-radius: 30px;
+        border: 0;
+    }
+    > button {
+        width: 5%;
+        border-top-right-radius: 30px;
+        border-bottom-right-radius: 30px;
+        border: 0;
+    }
+}
+
+
+div.main-banner {
+    position: relative;
+    border: 1px solid white;
+    margin: 0 auto;
+    margin-top: 20px;
+    height: 20%;
+    width: 90%;
+}
+
+div.bottom-dots {
+    height: 5%;
+    margin-top: 10px;
+    border: 1px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    > ul {
+        list-style-type: disc;
+    }
+}
+
+section.top-products-section {
+    position: relative;
+    height: auto;
+}
+
+div.top-products-div {
+    border: 1px solid white;
+    height: 30%;
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 20px;
+    > h2 {
+        color: white;
+    }
+
+    > div.top-products-selection {
+        border: 2px solid red;
+        height: 70%;
+        display: flex;
+        align-items: center;
+    }
+    
+}
+
+div.product-info {
+    border: 2px solid yellow;
+    height: 150px;
+    width: 150px;
+    margin-left: 20px;
+}
+
