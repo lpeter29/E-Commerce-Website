@@ -1,31 +1,148 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link rel="stylesheet" href="{% static 'master.css' %}">
-    <title>{% block title %} {% endblock %}</title>
-</head>
+/* <---------------------------------- GOOGLE FONTS IMPORTS ----------------------------------> */
 
-<body>
-    <nav class="nav-bar">
-        <header>
-            <h1>D'Catz</h1>
-            <span class="cart-fav-buttons">
-                <div class="cart"></div>
-                <div class="favorites"></div>
-            </span>
-        </header>
-    </nav>
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
-    {% block content %}
-    {% endblock %}
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
+    background: rgb(22,50,91); 
+    background: linear-gradient(180deg, rgba(22,50,91,1) 0%, rgba(34,123,148,1) 25%, rgba(120,183,208,1) 50%, rgba(217,217,217,1) 75%, rgba(255,220,127,1) 100%);
+}
 
-    <footer class="footer">
-            <ul>
-                <li>Need Help?</li>
-                <li>Terms of Service</li>
-                <li>Privacy & Policy</li>
-            </ul>
-    </footer>
-</body>
-</html>
+/* <---------------------------------- CSS FOR master.html ----------------------------------> */
+
+
+nav-bar {
+      position: fixed;
+      top: 0;
+  }
+  
+  header {
+      background-color: #0e3446;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0;
+      position: relative;
+      > span.cart-fav-buttons {
+          display: flex;
+          gap: 20px;
+          margin-right: 5%;
+      }
+      > h1 {
+          margin-left: 5%;
+      }
+  }
+  
+  div.cart {
+      border: 1px solid white;
+      height: 50px;
+      width: 50px; 
+  }
+  
+  div.favorites {
+      border: 1px solid white;
+      height: 50px;
+      width: 50px; 
+  }
+  
+  .footer {
+    background-color: rgba(0, 0, 0, 0.25);
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+footer{
+    height: 7%;
+    font-size: 15px;
+    margin-top: .5%;
+}
+
+.footer-left ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-left li {
+    margin-bottom: 10px;
+}
+
+.footer-left a {
+    color: #333;
+    text-decoration: none;
+}
+
+.footer-right {
+    text-align: right;
+}
+
+.footer-right p {
+    margin: 5px 0;
+}
+
+.footer-right a {
+    margin-right: 10px;
+}
+
+.footer-right i {
+    width: 24px; 
+    height: 24px;
+    color: black;
+}
+.follow{
+    font-size: 15px;
+    margin-left: 80%;
+}
+.follow i{
+    font-size: 20px;
+    color: black;
+}
+nav {
+    background-color: rgba(0, 0, 0, 0.25);
+     font: Open sans;
+    overflow: hidden;
+    padding: .5%;
+    
+    
+}
+  
+.logo {
+    float: left;
+    
+}
+  
+.logo a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 14px 16px;
+    font-size: 20px;
+}
+  
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    float: right;
+}
+  
+nav li {
+    float: left;
+    margin-left: 2vw;
+}
+  
+nav li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+i{
+    font-size: 20px;
+  }
