@@ -56,7 +56,7 @@
 <!--============== sign up form ito, ok na to, wag na galawin ====================-->
 <div class="Right-container">
 <div class="Form-container">
-<form method="POST">
+<form method="POST" action="{% url 'sign_up' %}">
     {% csrf_token %}
 
 <!-- container -->
