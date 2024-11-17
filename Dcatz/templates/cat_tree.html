@@ -1,0 +1,160 @@
+{% extends 'master.html' %}
+{% load static %}
+
+{% block title %}
+Cat Tree
+{% endblock %}
+
+{% block css %}
+{% endblock %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'cat_tree.css' %}">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    
+</head>
+<body>
+    <section>
+
+        <div class="semi-nav">
+            <a href="#">Accessories</a>
+            <a href="#">Clothing</a>
+            <a href="#">Furniture</a>
+            <a href="#">Food</a>
+            <a href="#">Toys</a>
+            <a href="#">Promo</a>
+            <a href="#">Free Shipping</a>
+            <div class="search-bar">
+                <input type="text" placeholder="Search...">
+                <button>search</button>
+              </div>
+        </div>
+
+        <div class="container">
+            <div class="img-1">
+        <img class="pic1" src="{% static 'CatTree/Chosen-Item.png' %}">       
+        <img class="pic2" src="{% static 'CatTree/Variety.png' %}">                     
+        </div>
+
+        <div class="share-container">
+            <p>Share:</p>
+            <a href="https://www.facebook.com/"><i class='bx bxl-facebook' ></i></a>
+            <a href="https://www.instagram.com/"><i class='bx bxl-instagram' ></i></a>
+            <a href="https://x.com/?lang=en"><i class='bx bxl-twitter' ></i></a>
+          </div>
+        
+    <img class="pic4" src="{% static 'CatTree/Vector 12.png' %}">              
+    
+    <div class="container2">
+        <h1>Cat Tree</h1>
+        <div class="rating-container">
+            <span class="star" data-value="1">&#9733;</span>
+            <span class="star" data-value="2">&#9733;</span>
+            <span class="star" data-value="3">&#9733;</span>
+            <span class="star" data-value="4">&#9733;</span>
+            <span class="star" data-value="5">&#9733;</span>
+            <div class="rating-value">0</div>
+          </div>
+          <i class='bx bxl-php' >00.00</i>
+          <p><span>Description:</span>&ensp;This model produces photorealistic quality,<br>
+             as seen in our asset “CatHouse 02”, which shows a fully textured<br>
+              object that is prepared for close-up and HD renders. Our pr   eview<br>
+               render is without postprocessing.</p>
+               <div class="variety">
+                <h4>Variety: </h5>
+                <input type="text" placeholder="S">
+                <input type="text" placeholder="M">
+                <input type="text" placeholder="L">
+               </div>
+               <div class="quantity-container">
+                <h5>Quantiy:</h5>
+                <button class="btn-decrease" onclick="decreaseQuantity()">-</button>
+                <input type="number" id="quantity" name="quantity" value="1" min="1" />
+                <button class="btn-increase" onclick="increaseQuantity()">+</button>
+            </div>
+            <div class="buy-cart">
+            <button class="cart" >Add to Cart</button>
+            <button class="buy">Buy Now</button>
+        </div> 
+    </div>
+</div>
+
+<div class="container3">
+    <img src="{% static 'CatTree/image 5.png' %}">              
+    <h1>Cat Tree</h1>
+    <div class="ratings1">
+        <img src="{% static 'CatTree/Ratings1.png' %}">              
+        <h1>P 00.00</h1>
+    </div>
+    <img src="{% static 'CatTree/image 5.png' %}">              
+    <h1>Cat Tree</h1>
+    <div class="ratings1">
+      <img src="{% static 'CatTree/Ratings1.png' %}">              
+      <h1>P 00.00</h1>
+    </div>
+</div>
+
+</section>
+
+<script>
+    
+const stars = document.querySelectorAll('.star');
+const ratingValue = document.querySelector('.rating-value');
+
+
+stars.forEach(star => {
+  star.addEventListener('click', () => {
+    const value = star.getAttribute('data-value');
+    
+   
+    ratingValue.textContent = value;
+    updateStars(value);
+  });
+
+  
+  star.addEventListener('mouseover', () => {
+    updateStars(star.getAttribute('data-value'));
+  });
+
+  
+  star.addEventListener('mouseleave', () => {
+    updateStars(ratingValue.textContent);
+  });
+});
+
+
+function updateStars(rating) {
+  stars.forEach(star => {
+    if (star.getAttribute('data-value') <= rating) {
+      star.style.color = '#f39c12'; 
+    } else {
+      star.style.color = '#ccc'; 
+    }
+  });
+}
+
+function increaseQuantity() {
+    let quantity = document.getElementById("quantity");
+    let currentValue = parseInt(quantity.value);
+    quantity.value = currentValue + 1;
+}
+
+function decreaseQuantity() {
+    let quantity = document.getElementById("quantity");
+    let currentValue = parseInt(quantity.value);
+    if (currentValue > 1) {
+        quantity.value = currentValue - 1;
+    }
+}
+
+</script>
+</body>
+</html>
+
+{% endblock %}
