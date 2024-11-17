@@ -11,7 +11,7 @@ body {
 
 
 .semi-nav {
-    margin-top: 5%;
+    margin-top: 1%;
     padding: 20px;
     text-align: center;
     margin-left: -35%;
@@ -130,6 +130,7 @@ font-size: 45px;
 
 .container2 i{
     font-size: 50px;
+    color: #A0FFAB;
 }
 .container2 span{
     font-size: 25px;
@@ -214,5 +215,5 @@ font-size: 45px;
     margin-top: 1%;
     margin-left: 10%;
     font-size: 17px;
-    color: white;
+    color: #A0FFAB;
 }
