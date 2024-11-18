@@ -57,6 +57,7 @@ def master(request):
     return HttpResponse(template.render())
     
 def home_page(request):
+    
     return render(request, 'home-page.html')
 
 def cat_tree(request):
