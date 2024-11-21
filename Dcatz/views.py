@@ -44,11 +44,11 @@ def sign_in(request):
             # Log the user in and redirect to the home page
             login(request, user)
             messages.success(request, 'Logged in successfully!')
-            return redirect('home-page')  # Change to your actual home page URL name
+            return redirect('home-page')  
         else:
             # Authentication failed
             messages.error(request, 'Invalid username or password')
-            return redirect('sign_in')  # Redirect to sign in page for retry
+            return redirect('sign_in')  
 
     return render(request, 'sign_in.html')
 

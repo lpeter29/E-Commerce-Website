@@ -28,15 +28,6 @@
     border: 1px solid #f5c6cb;
 }
 
-/* Heading container */
-.Heading-container {
-    width: 100%;
-    background: rgb(22,50,91);
-    height: 10vh;
-    display: flex;
-    align-items: center;
-}
-
 h2 {
     font-size: 4vh;
     margin-left:4%;
