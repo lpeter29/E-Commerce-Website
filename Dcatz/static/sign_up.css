@@ -66,14 +66,15 @@ h3 {
     font-size: 7vh;
     margin-top: 20%;
     margin-left: 20%;
-    font-family:Arial;
+    font-family: 'Open Sans', serif;
 }
 
 h4 {
     color: white;
     font-size: 3vh;
     margin-left: 20%;
-    font-family:Arial;
+    font-family: 'Open Sans', serif;
+    letter-spacing: -1px;
 }
 
 #Shop_now {
@@ -86,6 +87,8 @@ h4 {
     height: 5vh;
     margin-top: 2%;
     font-size: 3vh;
+    font-family: 'Open Sans', serif;
+    letter-spacing: -1px;
 }
 
 /* ------------------------------- Right container ------------------------- */
@@ -108,7 +111,7 @@ h4 {
     justify-content: center;
     text-align: center;
     margin-left: 0%;
-    
+    margin-top: 20px;
 }
 
 /* First and last name */
@@ -190,4 +193,8 @@ a:hover {
 
 input::placeholder {
     color: #888; 
+}
+
+footer {
+    display: none;
 }
