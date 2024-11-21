@@ -28,6 +28,10 @@
     border: 1px solid #f5c6cb;
 }
 
+<<<<<<< HEAD
+=======
+/* Heading container */
+>>>>>>> efb2c6bfa77d2ec560fee4ed45a441ca31b8ce7b
 
 h2 {
     font-size: 4vh;
@@ -114,6 +118,7 @@ h4 {
     justify-content: center;
     text-align: center;
     margin-left: 0%;
+    margin-top: 20px;
 }
 
 
@@ -187,4 +192,8 @@ a:hover {
 
 input::placeholder {
     color: #888; 
+}
+
+footer {
+    display: none;
 }
