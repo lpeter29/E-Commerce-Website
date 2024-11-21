@@ -62,3 +62,6 @@ def home_page(request):
 
 def cat_tree(request):
     return render(request, 'cat_tree.html')
+
+def cart(request):
+    return render(request, 'cart.html')

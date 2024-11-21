@@ -1,0 +1,76 @@
+{% extends 'master.html' %}
+{% load static %}
+
+{% block title %}
+Cart
+{% endblock %}
+
+{% block css %}
+{% endblock %}
+
+{% block content %}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'cart.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <div class="details">
+        <h5 class="item">Item(s)</h5>
+        <h5>Unit Price</h5>
+        <h5>Variation</h5>
+        <h5>Quantity</h5>
+        <h5>Total</h5>
+    </div>
+
+    <div class="item1">
+        <input type="checkbox">
+        <img src="{% static 'cart/Item2.png' %}">
+        <h5 class="item_name">Kitty Bat Wings</h5>
+        <h5 class="unit_price">₱ 0.00</h5>
+        <h5 class="variety">0</h5>
+        <h5 class="quantity">0</h5>
+        <h5>₱ 0.00</h5>
+
+    </div>
+
+    <div class="item2">
+        <input type="checkbox">
+        <img src="{% static 'cart/Item1.png' %}">
+        <h5 class="item_name">Cat Tree</h5>
+        <h5 class="unit_price">₱ 0.00</h5>
+        <h5 class="variety">0</h5>
+        <h5 class="quantity">0</h5>
+        <h5>₱ 0.00</h5>
+
+    </div>
+
+    <div class="item3">
+        <input type="checkbox">
+        <img src="{% static 'cart/Item3.png' %}">
+        <h5 class="item_name">Whiskas Cat Food</h5>
+        <h5 class="unit_price">₱ 0.00</h5>
+        <h5 class="variety">0</h5>
+        <h5 class="quantity">0</h5>
+        <h5>₱ 0.00</h5>
+    </div>
+
+    <div class="container">
+        <input type="checkbox">
+        <h6>Select All</h6>
+        <h5>Total Price (No. Items): </h5>
+        <h5>₱ 0.00</h5>
+        <button>Check Out</button>
+    </div>
+</body>
+</html>
+
+{% endblock %}
+
