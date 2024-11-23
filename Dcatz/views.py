@@ -72,3 +72,27 @@ def cart(request):
 
 def about(request):
     return render(request, 'about.html')
+
+def accessories(request):
+    return render(request, 'homepage/accessories.html')
+
+def clothing(request):
+    return render(request, 'homepage/clothing.html')
+
+def furniture(request):
+    return render(request, 'homepage/furniture.html')
+
+def food(request):
+    return render(request, 'homepage/food.html')
+
+def toys(request):
+    return render(request, 'homepage/toys.html')
+
+def promo(request):
+    return render(request, 'homepage/promo.html')
+
+def free_shipping(request):
+    return render(request, 'homepage/freeshipping.html')
+
+def discounts(request):
+    return render(request, 'homepage/10%.html')

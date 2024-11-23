@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Furniture - E-Commerce Store</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/furniture.css' %}">
+</head>
+<body>
+    <section class="sub-picks-section">
+        <div class="sub-picks">
+            <ul class="sub-picks-list">
+                <li><a href="{% url 'homepage:accessories' %}">Accessories</a></li>
+                <li><a href="{% url 'homepage:clothing' %}">Clothing</a></li>
+                <li><a href="{% url 'homepage:furniture' %}">Furniture</a></li>
+                <li><a href="{% url 'homepage:food' %}">Food</a></li>
+                <li><a href="{% url 'homepage:toys' %}">Toys</a></li>       
+            </ul>
+            <span id="sub-picks-span">
+                <ul class="sub-picks-list">
+                    <li><a href="{% url 'homepage:promo' %}">Promo</a></li>
+                    <li><a href="{% url 'homepage:free-shipping' %}">Free Shipping</a></li>
+                    <li><a href="{% url 'homepage:discounts' %}">10% Off Deals</a></li>
+                </ul>
+            </span>
+            <span>
+                <ul class="search-ul">
+                    <li>
+                        <div class="search-div">
+                            <input type="text" name="search" id="search" class="search-bar">
+                            <button class="search-button">Search</button>
+                        </div>
+                    </li>
+                </ul>
+            </span>
+        </div>
+    </section>
+
+    <main>
+        <section class="category-banner">
+            <h1>Shop Furniture</h1>
+            <p>Cat Furniture</p>
+        </section>
+
+        <section class="furniture-list">
+            <div class="product-item">
+                <img src="{% static 'homepage/Furniture/Furniture/furni1.png' %}" alt="Cat Furniture 1">
+                <h3>Luxury Cat Tree</h3>
+                <p class="price">$150.00</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+
+            <div class="product-item">
+                <img src="{% static 'homepage/Furniture/Furniture/furni2.png' %}" alt="Cat Furniture 2">
+                <h3>Modern Cat Condo</h3>
+                <p class="price">$75.00</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+
+            <div class="product-item">
+                <img src="{% static 'homepage/Furniture/Furniture/furni3.png' %}" alt="Cat Furniture 3">
+                <h3>Cat Scratching Post</h3>
+                <p class="price">$120.00</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+
+            <div class="product-item">
+                <img src="{% static 'homepage/Furniture/Furniture/furni4.png' %}" alt="Cat Furniture 4">
+                <h3>Cat Bed Deluxe</h3>
+                <p class="price">$250.00</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+
+            <div class="product-item">
+                <img src="{% static 'homepage/Furniture/Furniture/furni5.png' %}" alt="Cat Furniture 5">
+                <h3>Window Perch</h3>
+                <p class="price">$60.00</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+
+            <div class="product-item">
+                <img src="{% static 'homepage/Furniture/Furniture/furni6.png' %}" alt="Cat Furniture 6">
+                <h3>Cat Tower</h3>
+                <p class="price">$60.00</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+
+            <div class="product-item">
+                <img src="{% static 'homepage/Furniture/Furniture/furni7.png' %}" alt="Cat Furniture 7">
+                <h3>Cat House</h3>
+                <p class="price">$60.00</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+
+            <div class="product-item">
+                <img src="{% static 'homepage/Furniture/Furniture/furni8.png' %}" alt="Cat Furniture 8">
+                <h3>Cat Hammock</h3>
+                <p class="price">$60.00</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+
+            <div class="product-item">
+                <img src="{% static 'homepage/Furniture/Furniture/furni9.png' %}" alt="Cat Furniture 9">
+                <h3>Cat Climbing Wall</h3>
+                <p class="price">$45.00</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

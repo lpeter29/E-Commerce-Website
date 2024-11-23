@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Shipping Vouchers</title>
+    <link rel="stylesheet" href="freesipping.css"> <!-- Link to your external CSS file -->
+</head>
+<body>
+
+    <section class="sub-picks-section">
+        <div class="sub-picks">
+            <ul class="sub-picks-list">
+                <li>Accessories</li>
+                <li>Clothing</li>
+                <li>Furniture</li>
+                <li>Food</li>
+                <li>Toys</li>       
+            </ul>
+            <span id="sub-picks-span">
+                <ul class="sub-picks-list">
+                    <li>Promo</li>
+                    <li>Free Shipping</li>
+                    <li>10% Off Deals</li>
+                </ul>
+            </span>
+            <span>
+                <ul class="search-ul">
+                    <li>
+                        <div class="search-div">
+                            <input type="text" name="search" id="search" class="search-bar">
+                            <button class="search-button">Search</button>
+                        </div>
+                    </li>
+                </ul>
+            </span>
+        </div>
+    </section>
+    <div class="container">
+        <div class="header">
+            <h1>Patong-Patong na Vouchers</h1>
+            <p>Araw-Araw na Free Shipping</p>
+        </div>
+
+        <div class="voucher-section">
+            <h2>Free Shipping Vouchers</h2>
+
+            <div class="voucher-card">
+                <h3>100% Free Shipping</h3>
+                <p>0 Min. Spend</p>
+                <p>Sitewide</p>
+                <p>Valid Till 23 Nov | T&C</p>
+            </div>
+
+            <div class="voucher-card">
+                <h3>100% Free Shipping</h3>
+                <p>0 Min. Spend</p>
+                <p>Valid Till 20 Nov | T&C</p>
+            </div>
+
+            <div class="voucher-card">
+                <h3>Shipping Discount up to ₱200 Off</h3>
+                <p>Min. Spend ₱1.5K</p>
+                <p>Valid Till 22 Nov | T&C</p>
+                <a href="#" class="claim-button">Claim</a>
+            </div>
+
+            <div class="voucher-card">
+                <h3>Shipping Discount up to ₱300 Off</h3>
+                <p>Min. Spend ₱2K</p>
+                <p>Valid Till 22 Nov | T&C</p>
+                <a href="#" class="claim-button">Claim</a>
+            </div>
+        </div>
+
+        
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const claimButtons = document.querySelectorAll('.claim-button');
+            
+            claimButtons.forEach(button => {
+                button.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    alert('Voucher claimed!');
+                });
+            });
+        });
+    </script>
+    
+</body>
+</html>

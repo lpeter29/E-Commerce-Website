@@ -1,0 +1,191 @@
+/* Floating alert styles */
+.alert {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    font-size: 16px;
+    z-index: 1000;
+    width: 60%;
+    max-width: 500px;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    text-align: center;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+h2 {
+    font-size: 4vh;
+    margin-left:4%;
+    color:white;
+}
+
+/* Main layout */
+.Main {
+    display: flex;
+    height: 90vh;
+    flex-wrap: wrap; 
+    background: linear-gradient(180deg, rgba(22,50,91,1) 0%, rgba(34,123,148,1) 25%, rgba(120,183,208,1) 50%, rgba(217,217,217,1) 75%, rgba(255,220,127,1) 100%);
+}
+
+/* -------------------------------------------- Left container ----------------------------------------- */
+.Left-container {
+    flex: 1;
+    background-color: rgba(0, 0, 255, 0); 
+    overflow-y: auto;
+    width: 50%;
+    
+   
+}
+
+h3 {
+    color: white;
+    font-size: 7vh;
+    margin-top: 20%;
+    margin-left: 20%;
+    font-family: 'Open Sans', serif;
+}
+
+h4 {
+    color: white;
+    font-size: 3vh;
+    margin-left: 20%;
+    font-family: 'Open Sans', serif;
+    letter-spacing: -1px;
+}
+
+#Shop_now {
+    margin-left: 20%;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    height: 5vh;
+    margin-top: 2%;
+    font-size: 3vh;
+    font-family: 'Open Sans', serif;
+    letter-spacing: -1px;
+}
+
+/* ------------------------------- Right container ------------------------- */
+.Right-container {
+    flex: 1;
+    background-color: rgba(0, 0, 255, 0);
+    justify-content: center;
+    height: 100%;
+    width: 50%;
+    display: flex;
+    
+}
+
+.Form-container {
+    width: 80%;
+    background-color: rgba(255,255, 255, 0.5);
+    border-radius: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    height: 80vh;
+    justify-content: center;
+    text-align: center;
+    margin-left: 0%;
+    margin-top: 20px;
+}
+
+/* First and last name */
+.First_Last_name_container {
+    display: flex;
+   
+    width: 100%;
+}
+
+.First_name, .Last_name {
+    width: 45%;
+}
+
+.First_name {
+    margin-left: 5%;
+}
+
+/* Sign up label */
+.Sign_up_parent {
+    display: flex;
+    align-items: flex-start;
+}
+
+#Sign_up {
+    margin-top: 5%;
+    margin-left: 10%;
+    font-size: 5vh;
+    font-family: Arial;
+    margin-bottom: 3%;
+}
+
+/* Input */
+input[type="text"], input[type="password"] {
+    width: 80%;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    height: 7vh;
+    margin-top: 2%;
+    font-size: 3vh;
+    padding: 0 10px;
+    background-color: rgba(255,255, 255, 0.5);
+}
+
+/* Button */
+button[type="submit"] {
+    width: 82%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    height: 7vh;
+    margin-top: 2%;
+    font-size: 4vh;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Paragraph */
+p {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 18px; /* Larger text */
+    font-weight: bold; /* Make it bold */
+}
+
+a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+input::placeholder {
+    color: #888; 
+}
+
+footer {
+    display: none;
+}

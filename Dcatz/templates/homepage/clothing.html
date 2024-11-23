@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clothing - E-Commerce Store</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/clothing.css' %}">
+</head>
+<body>
+    <section class="sub-picks-section">
+        <div class="sub-picks">
+            <p>Cat Clothing</p>
+        </div>
+    </section>
+
+    <section class="accessories-list">
+        <div class="product-item">
+            <img src="{% static 'homepage/images/clothing1.png' %}" alt="Cat Clothing 1">
+            <h3>Stylish Cat Sweater</h3>
+            <p class="price">$29.99</p>
+            <button class="add-to-cart">Add to Cart</button>
+        </div>
+
+        <div class="product-item">
+            <img src="{% static 'homepage/images/clothing2.png' %}" alt="Cat Clothing 2">
+            <h3>Cat Raincoat</h3>
+            <p class="price">$34.99</p>
+            <button class="add-to-cart">Add to Cart</button>
+        </div>
+
+        <div class="product-item">
+            <img src="{% static 'homepage/images/clothing3.png' %}" alt="Cat Clothing 3">
+            <h3>Winter Cat Jacket</h3>
+            <p class="price">$39.99</p>
+            <button class="add-to-cart">Add to Cart</button>
+        </div>
+
+        <div class="product-item">
+            <img src="{% static 'homepage/images/clothing4.png' %}" alt="Cat Clothing 4">
+            <h3>Cat Party Dress</h3>
+            <p class="price">$44.99</p>
+            <button class="add-to-cart">Add to Cart</button>
+        </div>
+
+        <div class="product-item">
+            <img src="{% static 'homepage/images/clothing5.png' %}" alt="Cat Clothing 5">
+            <h3>Cat Bow Tie</h3>
+            <p class="price">$14.99</p>
+            <button class="add-to-cart">Add to Cart</button>
+        </div>
+    </section>
+</body>
+</html>

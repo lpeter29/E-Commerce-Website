@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Promo Banner</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/promo.css' %}">
+</head>
+<body>
+    <section class="sub-picks-section">
+        <div class="sub-picks">
+            <ul class="sub-picks-list">
+                <li><a href="{% url 'homepage:accessories' %}">Accessories</a></li>
+                <li><a href="{% url 'homepage:clothing' %}">Clothing</a></li>
+                <li><a href="{% url 'homepage:furniture' %}">Furniture</a></li>
+                <li><a href="{% url 'homepage:food' %}">Food</a></li>
+                <li><a href="{% url 'homepage:toys' %}">Toys</a></li>       
+            </ul>
+            <span id="sub-picks-span">
+                <ul class="sub-picks-list">
+                    <li><a href="{% url 'homepage:promo' %}">Promo</a></li>
+                    <li><a href="{% url 'homepage:free-shipping' %}">Free Shipping</a></li>
+                    <li><a href="{% url 'homepage:discounts' %}">10% Off Deals</a></li>
+                </ul>
+            </span>
+            <span>
+                <ul class="search-ul">
+                    <li>
+                        <div class="search-div">
+                            <input type="text" name="search" id="search" class="search-bar">
+                            <button class="search-button">Search</button>
+                        </div>
+                    </li>
+                </ul>
+            </span>
+        </div>
+    </section>
+
+    <!-- Promo Banner with Countdown Timer -->
+    <div class="promo-banner">
+        <div class="promo-content">
+            <div class="promo-header">
+                <h1>LIMITED TIME OFFER</h1>
+                <p class="discount">Up to 50% OFF!</p>
+                <div class="countdown">Hurry! Ends in <span id="timer"></span></div>
+            </div>
+            <div class="promo-main">
+                <div class="product-image">
+                    <img src="{% static 'homepage/promo/background.jpg' %}" alt="Promotional Banner">
+                </div>
+                <div class="promo-details">
+                    <h2>Special Cat Collection</h2>
+                    <p>Exclusive deals on our premium cat products. Limited time only!</p>
+                    <button class="cta-button">Shop Now</button>
+                </div>
+            </div>
+            <div class="free-shipping">
+                <p>Free Shipping on Orders Above ₱1,000!</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const timerElement = document.getElementById("timer");
+
+        function updateTimer() {
+            const countdownDuration = 1000; 
+            let remainingTime = countdownDuration; 
+
+            const interval = setInterval(function () {
+                const minutes = Math.floor(remainingTime / 60); 
+                const seconds = remainingTime % 60; 
+                
+                timerElement.innerHTML = `${minutes}m ${seconds}s`;
+
+                remainingTime--; 
+
+                if (remainingTime < 0) {
+                    clearInterval(interval); 
+                    timerElement.innerHTML = "EXPIRED";
+                }
+            }, 1000); 
+        }
+
+        updateTimer();
+    </script>
+</body>
+</html>
