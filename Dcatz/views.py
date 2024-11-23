@@ -2,7 +2,7 @@ from django.shortcuts import render, loader, redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from .models import UserProfile
 
 def sign_up(request):
@@ -52,6 +52,10 @@ def sign_in(request):
 
     return render(request, 'sign_in.html')
 
+def logout_view(request):
+    logout(request)
+    return redirect('sign_in')
+
 def master(request):
     template = loader.get_template('master.html')
     return HttpResponse(template.render())
@@ -65,3 +69,6 @@ def cat_tree(request):
 
 def cart(request):
     return render(request, 'cart.html')
+
+def about(request):
+    return render(request, 'about.html')

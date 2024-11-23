@@ -13,13 +13,19 @@
             <a href="#">D'Catz</a>
         </div>
         <ul class="nav-ul">
+            {% if user.is_authenticated %}
                 <li><a href="/home-page" id="nav-links">Home</a></li>
-                <li><a href="#" id="nav-links">About</a></li>
-                <li><a href="#" id="nav-links">Contacts</a></li>
+                <li><a href="/about" id="nav-links">About</a></li>
+                <li><a href="/contacts" id="nav-links">Contacts</a></li>
                 <span class="nav-icons">
-                    <li><a href="#" id="nav-links"><i class='bx bx-cart-add' ></i></a></li>
-                    <li><a href="#" id="nav-links"><i class='bx bxs-heart' ></i></a></li>
+                    <li><a href="/cart" id="nav-links"><i class='bx bx-cart-add' ></i></a></li>
+                    <li><a href="/wishlist" id="nav-links"><i class='bx bxs-heart' ></i></a></li>
                 </span>
+                <li><a href="/logout" id="nav-links">Log Out</a></li>
+            {% else %}
+                <li><a href="/sign-in" id="nav-links">Sign In</a></li>
+                <li><a href="/sign-up" id="nav-links">Sign Up</a></li>
+            {% endif %}
         </ul>
       </nav>
 
@@ -44,19 +50,6 @@
             <p>+123-456-7890</p>
             <p>dll@email.com</p>
         </span>
-
-        
-        <!-- <div class="follow">
-        <p>Follow Us</p>
-            <a href="#"><i class='bx bxl-facebook' ></i></a>
-            <a href="#"><i class='bx bxl-twitter' ></i></a>
-        </div>
-    
-        <div class="footer-right">
-            <p>Contact Us</p>
-            <p>+123-456-7890</p>
-            <p>dll@email.com</p>
-        </div> -->
     </footer>
 </body>
 </html>

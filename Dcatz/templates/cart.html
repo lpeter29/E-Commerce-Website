@@ -6,71 +6,157 @@ Cart
 {% endblock %}
 
 {% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'cart.css' %}">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
+<div class="page-container">
+    <div class="cart-container">
+        <table class="cart-table">
+            <thead>
+                <tr>
+                    <th class="select-col"></th>
+                    <th class="item-col">Item(s)</th>
+                    <th>Unit Price</th>
+                    <th>Variation</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="item1">
+                    <td><input type="checkbox" class="item-checkbox"></td>
+                    <td class="item-info">
+                        <img src="{% static 'cart/Item2.png' %}" alt="Kitty Bat Wings">
+                        <br>
+                        <span class="item-name">Kitty Bat Wings</span>
+                    </td>
+                    <td class="unit-price">₱299.00</td>
+                    <td class="variety">Black</td>
+                    <td>
+                        <div class="quantity-wrapper">
+                            <button class="qty-btn" onclick="decrementQty(1)">-</button>
+                            <input type="number" class="qty-input" id="qty1" value="1" min="1" max="10" onchange="updateTotal(1)">
+                            <button class="qty-btn" onclick="incrementQty(1)">+</button>
+                        </div>
+                    </td>
+                    <td class="item-total" id="total1">₱299.00</td>
+                </tr>
+                <tr class="item2">
+                    <td><input type="checkbox" class="item-checkbox"></td>
+                    <td class="item-info">
+                        <img src="{% static 'cart/Item1.png' %}" alt="Cat Tree">
+                        <br>
+                        <span class="item-name">Cat Tree</span>
+                    </td>
+                    <td class="unit-price">₱1,499.00</td>
+                    <td class="variety">Beige</td>
+                    <td>
+                        <div class="quantity-wrapper">
+                            <button class="qty-btn" onclick="decrementQty(2)">-</button>
+                            <input type="number" class="qty-input" id="qty2" value="1" min="1" max="10" onchange="updateTotal(2)">
+                            <button class="qty-btn" onclick="incrementQty(2)">+</button>
+                        </div>
+                    </td>
+                    <td class="item-total" id="total2">₱1,499.00</td>
+                </tr>
+                <tr class="item3">
+                    <td><input type="checkbox" class="item-checkbox"></td>
+                    <td class="item-info">
+                        <img src="{% static 'cart/Item3.png' %}" alt="Whiskas Cat Food">
+                        <br>
+                        <span class="item-name">Whiskas Cat Food</span>
+                    </td>
+                    <td class="unit-price">₱199.00</td>
+                    <td class="variety">Tuna</td>
+                    <td>
+                        <div class="quantity-wrapper">
+                            <button class="qty-btn" onclick="decrementQty(3)">-</button>
+                            <input type="number" class="qty-input" id="qty3" value="1" min="1" max="10" onchange="updateTotal(3)">
+                            <button class="qty-btn" onclick="incrementQty(3)">+</button>
+                        </div>
+                    </td>
+                    <td class="item-total" id="total3">₱199.00</td>
+                </tr>
+            </tbody>
+        </table>
 
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="{% static 'cart.css' %}">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
-
-</head>
-<body>
-    <div class="details">
-        <h5 class="item">Item(s)</h5>
-        <h5>Unit Price</h5>
-        <h5>Variation</h5>
-        <h5>Quantity</h5>
-        <h5>Total</h5>
+        <div class="cart-footer">
+            <div class="select-all">
+                <input type="checkbox" id="selectAll" onchange="toggleAll()">
+                <span>Select All</span>
+            </div>
+            <div class="total-section">
+                <span>Total Price (<span id="itemCount">0</span> Items): </span>
+                <span id="cartTotal">₱0.00</span>
+                <button class="checkout-btn" onclick="proceedToCheckout()">Check Out</button>
+            </div>
+        </div>
     </div>
+</div>
 
-    <div class="item1">
-        <input type="checkbox">
-        <img src="{% static 'cart/Item2.png' %}">
-        <h5 class="item_name">Kitty Bat Wings</h5>
-        <h5 class="unit_price">₱ 0.00</h5>
-        <h5 class="variety">0</h5>
-        <h5 class="quantity">0</h5>
-        <h5>₱ 0.00</h5>
+<script>
+function incrementQty(itemId) {
+    const input = document.getElementById('qty' + itemId);
+    if (input.value < 10) {
+        input.value = parseInt(input.value) + 1;
+        updateTotal(itemId);
+    }
+}
 
-    </div>
+function decrementQty(itemId) {
+    const input = document.getElementById('qty' + itemId);
+    if (input.value > 1) {
+        input.value = parseInt(input.value) - 1;
+        updateTotal(itemId);
+    }
+}
 
-    <div class="item2">
-        <input type="checkbox">
-        <img src="{% static 'cart/Item1.png' %}">
-        <h5 class="item_name">Cat Tree</h5>
-        <h5 class="unit_price">₱ 0.00</h5>
-        <h5 class="variety">0</h5>
-        <h5 class="quantity">0</h5>
-        <h5>₱ 0.00</h5>
+function updateTotal(itemId) {
+    const qty = document.getElementById('qty' + itemId).value;
+    const price = parseFloat(document.querySelector('.item' + itemId + ' .unit-price').textContent.replace('₱', '').replace(',', ''));
+    const total = qty * price;
+    document.getElementById('total' + itemId).textContent = '₱' + total.toLocaleString('en-PH', {minimumFractionDigits: 2});
+    updateCartTotal();
+}
 
-    </div>
+function updateCartTotal() {
+    let total = 0;
+    let count = 0;
+    const checkboxes = document.querySelectorAll('.item-checkbox:checked');
+    
+    checkboxes.forEach(checkbox => {
+        const row = checkbox.closest('tr');
+        const itemTotal = parseFloat(row.querySelector('.item-total').textContent.replace('₱', '').replace(',', ''));
+        total += itemTotal;
+        count++;
+    });
 
-    <div class="item3">
-        <input type="checkbox">
-        <img src="{% static 'cart/Item3.png' %}">
-        <h5 class="item_name">Whiskas Cat Food</h5>
-        <h5 class="unit_price">₱ 0.00</h5>
-        <h5 class="variety">0</h5>
-        <h5 class="quantity">0</h5>
-        <h5>₱ 0.00</h5>
-    </div>
+    document.getElementById('cartTotal').textContent = '₱' + total.toLocaleString('en-PH', {minimumFractionDigits: 2});
+    document.getElementById('itemCount').textContent = count;
+}
 
-    <div class="container">
-        <input type="checkbox">
-        <h6>Select All</h6>
-        <h5>Total Price (No. Items): </h5>
-        <h5>₱ 0.00</h5>
-        <button>Check Out</button>
-    </div>
-</body>
-</html>
+function toggleAll() {
+    const selectAll = document.getElementById('selectAll');
+    const checkboxes = document.querySelectorAll('.item-checkbox');
+    checkboxes.forEach(checkbox => {
+        checkbox.checked = selectAll.checked;
+    });
+    updateCartTotal();
+}
 
+document.querySelectorAll('.item-checkbox').forEach(checkbox => {
+    checkbox.addEventListener('change', updateCartTotal);
+});
+
+function proceedToCheckout() {
+    const selectedItems = document.querySelectorAll('.item-checkbox:checked').length;
+    if (selectedItems === 0) {
+        alert('Please select at least one item to checkout');
+        return;
+    }
+    // Add your checkout logic here
+}
+</script>
 {% endblock %}
-
