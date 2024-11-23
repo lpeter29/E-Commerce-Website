@@ -3,24 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="10%.css">
+    <title>10% Off Deals - Dcatz</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/10%.css' %}">
 </head>
 <body>
     <section class="sub-picks-section">
         <div class="sub-picks">
             <ul class="sub-picks-list">
-                <li>Accessories</li>
-                <li>Clothing</li>
-                <li>Furniture</li>
-                <li>Food</li>
-                <li>Toys</li>       
+                <li><a href="{% url 'homepage:accessories' %}">Accessories</a></li>
+                <li><a href="{% url 'homepage:clothing' %}">Clothing</a></li>
+                <li><a href="{% url 'homepage:furniture' %}">Furniture</a></li>
+                <li><a href="{% url 'homepage:food' %}">Food</a></li>
+                <li><a href="{% url 'homepage:toys' %}">Toys</a></li>       
             </ul>
             <span id="sub-picks-span">
                 <ul class="sub-picks-list">
-                    <li>Promo</li>
-                    <li>Free Shipping</li>
-                    <li>10% Off Deals</li>
+                    <li><a href="{% url 'homepage:promo' %}">Promo</a></li>
+                    <li><a href="{% url 'homepage:free-shipping' %}">Free Shipping</a></li>
+                    <li><a href="{% url 'homepage:discounts' %}">10% Off Deals</a></li>
                 </ul>
             </span>
             <span>
@@ -36,7 +37,6 @@
         </div>
     </section>
 
-    
     <div class="container">
         <h1>🎉 Big Design Discount! 🎉</h1>
         <p>Level up your Cat with stunning design work—now with an exclusive <strong>10% OFF</strong>!</p>
@@ -45,7 +45,7 @@
 
         <p class="cta">Use code <strong>DESIGN10</strong> at checkout for instant savings!</p>
         
-        <a href="#" class="button">Claim Your Discount Now!</a>
+        <a href="{% url 'homepage:shop' %}" class="button">Claim Your Discount Now!</a>
 
         <p class="footer">⏳ Hurry! This offer is limited and won't last long.</p>
     </div>
