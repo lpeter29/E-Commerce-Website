@@ -1,0 +1,36 @@
+Django==5.0.2
+Pillow==10.2.0
+django-crispy-forms==2.1
+django-filter==23.5
+djangorestframework==3.14.0
+python-decouple==3.8
+stripe==9.3.0
+whitenoise==6.6.0
+gunicorn==21.2.0
+psycopg2-binary==2.9.9
+dj-database-url==2.1.0
+
+# Optional but recommended for enhanced functionality
+django-allauth==0.61.1
+django-debug-toolbar==4.2.0
+
+# Development dependencies
+pytest==7.4.4
+coverage==7.4.4
+
+# Frontend dependencies
+django-compressor==4.4
+django-sass-processor==1.3
+
+# Deployment and production
+django-cors-headers==4.3.1
+django-environ==0.11.2
+
+# Security
+django-axes==6.3.0
+
+# Caching
+django-redis==5.4.0
+
+# Internationalization
+Babel==2.14.0
