@@ -15,27 +15,42 @@ Cat Tree
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="{% static 'cat_tree.css' %}">
+    <link rel="stylesheet" href="{% static 'css/subtopic.css' %}">
+    <link rel="stylesheet" href="{% static 'css/cat_tree.css' %}">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     
 </head>
 <body>
+  <section class="sub-picks-section">
+    <div class="sub-picks">
+        <ul class="sub-picks-list">
+            <li><a href="{% url 'homepage:accessories' %}" class="li-decor">Accessories</a></li>
+            <li><a href="{% url 'homepage:clothing' %}" class="li-decor">Clothing</a></li>
+            <li><a href="{% url 'homepage:furniture' %}" class="li-decor">Furniture</a></li>
+            <li><a href="{% url 'homepage:food' %}" class="li-decor">Food</a></li>
+            <li><a href="{% url 'homepage:toys' %}" class="li-decor">Toys</a></li>       
+        </ul>
+        <span id="sub-picks-span">
+            <ul class="sub-picks-list">
+                <li><a href="{% url 'homepage:promo' %}" class="li-decor">Promo</a></li>
+                <li><a href="{% url 'homepage:free-shipping' %}" class="li-decor">Free Shipping</a></li>
+                <li><a href="{% url 'homepage:discounts' %}" class="li-decor">10% Off Deals</a></li>
+            </ul>
+        </span>
+        <span>
+            <ul class="search-ul">
+                <li>
+                    <div class="search-div">
+                        <input type="text" name="search" id="search" class="search-bar">
+                        <button class="search-button">Search</button>
+                    </div>
+                </li>
+            </ul>
+        </span>
+    </div>
+  </section>
+
     <section>
-
-        <div class="semi-nav">
-            <a href="#">Accessories</a>
-            <a href="#">Clothing</a>
-            <a href="#">Furniture</a>
-            <a href="#">Food</a>
-            <a href="#">Toys</a>
-            <a href="#">Promo</a>
-            <a href="#">Free Shipping</a>
-            <div class="search-bar">
-                <input type="text" placeholder="Search...">
-                <button>search</button>
-              </div>
-        </div>
-
         <div class="container">
             <div class="img-1">
         <img class="pic1" src="{% static 'CatTree/Chosen-Item.png' %}">       

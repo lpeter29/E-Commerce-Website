@@ -1,13 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Toys - E-Commerce Store</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/toys.css' %}">
-</head>
-<body>
+{% extends 'master.html' %}
+{% load static %}
+
+{% block title %}Toys - Dcatz{% endblock %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'css/subtopic.css' %}">
+    <link rel="stylesheet" href="{% static 'css/itemlist.css' %}">
+    <link rel="stylesheet" href="{% static 'css/background.css' %}">
     <section class="sub-picks-section">
         <div class="sub-picks">
             <ul class="sub-picks-list">
@@ -42,18 +41,16 @@
             <h1>Shop Toys</h1>
             <p>Cat Toys</p>
         </section>
-
-        <section class="accessories-list">
+        
+        <section class="list">
             {% for x in all %}
                 <div class="product-item">
-                    <img src="{% static 'all-files/' %}{{ x.file_name }}" alt="Cat Toy 1">
+                    <img src="{% static 'all-files/' %}{{ x.file_name }}" alt="Cat Toy">
                     <h3>{{ x.item_name }}</h3>
-                    <p class="price">₱{{ x.price }}</p>
+                    <p class="price">${{ x.price }}</p>
                     <button class="add-to-cart">Add to Cart</button>
                 </div>
             {% endfor %}
-            </div>
         </section>
     </main>
-</body>
-</html>
+{% endblock %}

@@ -2,54 +2,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/master.css' %}">
     <title>{% block title %} {% endblock %}</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
 <body>
-    <nav>
-        <div class="logo">
-            <a href="#">D'Catz</a>
-        </div>
-        <ul class="nav-ul">
-            {% if user.is_authenticated %}
-                <li><a href="/home-page" id="nav-links">Home</a></li>
-                <li><a href="/about" id="nav-links">About</a></li>
-                <li><a href="/contacts" id="nav-links">Contacts</a></li>
-                <span class="nav-icons">
-                    <li><a href="/cart" id="nav-links"><i class='bx bx-cart-add' ></i></a></li>
-                    <li><a href="/wishlist" id="nav-links"><i class='bx bxs-heart' ></i></a></li>
-                </span>
-                <li><a href="/logout" id="nav-links">Log Out</a></li>
-            {% else %}
-                <li><a href="/sign-in" id="nav-links">Sign In</a></li>
-                <li><a href="/sign-up" id="nav-links">Sign Up</a></li>
-            {% endif %}
-        </ul>
-      </nav>
-
-    {% block content %}
-    {% endblock %}
-
-    <footer>
-        <span class="footer-left">
-            <ul class="footer-ul">
-                <li id="footer-li"><a href="#">About Us</a></li>
-                <li id="footer-li"><a href="#">Terms of Service</a></li>
-                <li id="footer-li"><a href="#">Privacy & Policy</a></li>
+    <div id="wrapper">
+        <nav>
+            <div class="logo">
+                <a href="#">D'Catz</a>
+            </div>
+            <ul class="nav-ul">
+                {% if user.is_authenticated %}
+                    <li><a href="/home-page" id="nav-links">Home</a></li>
+                    <li><a href="/about" id="nav-links">About</a></li>
+                    <li><a href="/contacts" id="nav-links">Contacts</a></li>
+                    <span class="nav-icons">
+                        <li><a href="/cart" id="nav-links"><i class='bx bx-cart-add'></i></a></li>
+                        <li><a href="/wishlist" id="nav-links"><i class='bx bxs-heart'></i></a></li>
+                    </span>
+                    <li><a href="/logout" id="nav-links">Log Out</a></li>
+                {% else %}
+                    <li><a href="/sign-in" id="nav-links">Sign In</a></li>
+                    <li><a href="/sign-up" id="nav-links">Sign Up</a></li>
+                {% endif %}
             </ul>
-        </span>
-        <span class="footer-middle">
-            <p>Follow Us</p>
-            <a href="#"><i class='bx bxl-facebook' ></i></a>
-            <a href="#"><i class='bx bxl-twitter' ></i></a>
-        </span>
-        <span class="footer-right">
-            <p>Contact Us</p>
-            <p>+123-456-7890</p>
-            <p>dll@email.com</p>
-        </span>
-    </footer>
+        </nav>
+
+        <main>
+            <div class="content">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </main>
+
+        <footer>
+            <span class="footer-left">
+                <ul class="footer-ul">
+                    <li id="footer-li"><a href="#">About Us</a></li>
+                    <li id="footer-li"><a href="#">Terms of Service</a></li>
+                    <li id="footer-li"><a href="#">Privacy & Policy</a></li>
+                </ul>
+            </span>
+            <span class="footer-middle">
+                <p>Follow Us</p>
+                <a href="#"><i class='bx bxl-facebook'></i></a>
+                <a href="#"><i class='bx bxl-twitter'></i></a>
+            </span>
+            <span class="footer-right">
+                <p>Contact Us</p>
+                <p>+123-456-7890</p>
+                <p>dll@email.com</p>
+            </span>
+        </footer>
+    </div>
 </body>
 </html>

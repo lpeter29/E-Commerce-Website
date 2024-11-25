@@ -1,0 +1,107 @@
+body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+}
+
+main {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.header h1 {
+    color: white;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.header p {
+    color: white;
+    font-size: 1.2em;
+}
+
+.voucher-section {
+    margin-top: 30px;
+}
+
+.voucher-section h2 {
+    color: white;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.voucher-card {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.voucher-card:hover {
+    transform: translateY(-5px);
+}
+
+.voucher-card h3 {
+    color: white;
+    margin: 0 0 10px 0;
+}
+
+.voucher-card p {
+    color: white;
+    margin: 5px 0;
+}
+
+.claim-button {
+    display: inline-block;
+    background: linear-gradient(45deg, #227B94, #16325b);
+    color: white;
+    padding: 12px 25px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.claim-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        margin: 10px;
+        padding: 20px;
+    }
+    
+    .header h1 {
+        font-size: 2em;
+    }
+    
+    .header p {
+        font-size: 1em;
+    }
+    
+    .voucher-card {
+        margin: 10px;
+        padding: 20px;
+    }
+}

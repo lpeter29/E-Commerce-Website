@@ -99,7 +99,11 @@ def clothing(request):
     return render(request, 'homepage/clothing.html', context)
 
 def furniture(request):
-    return render(request, 'homepage/furniture.html')
+    all = CatFurniture.objects.all().values()
+    context = {
+        'all': all
+    }
+    return render(request, 'homepage/furniture.html', context)
 
 def food(request):
     all = CatFood.objects.all().values()
@@ -122,4 +126,4 @@ def free_shipping(request):
     return render(request, 'homepage/freeshipping.html')
 
 def discounts(request):
-    return render(request, 'homepage/10%.html')
+    return render(request, 'homepage/discounts.html')

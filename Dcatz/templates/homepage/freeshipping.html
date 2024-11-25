@@ -1,29 +1,25 @@
-<!DOCTYPE html>
-
+{% extends 'master.html' %}
 {% load static %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free Shipping Vouchers</title>
-    <link rel="stylesheet" href="{% static 'css\freesipping.css' %}"> <!-- Link to your external CSS file -->
-</head>
-<body>
 
+{% block title %}Free Shipping Vouchers - Dcatz{% endblock %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'css/subtopic.css' %}">
+    <link rel="stylesheet" href="{% static 'css/freeshipping.css' %}">
     <section class="sub-picks-section">
         <div class="sub-picks">
             <ul class="sub-picks-list">
-                <li>Accessories</li>
-                <li>Clothing</li>
-                <li>Furniture</li>
-                <li>Food</li>
-                <li>Toys</li>       
+                <li><a href="{% url 'homepage:accessories' %}" class="li-decor">Accessories</a></li>
+                <li><a href="{% url 'homepage:clothing' %}" class="li-decor">Clothing</a></li>
+                <li><a href="{% url 'homepage:furniture' %}" class="li-decor">Furniture</a></li>
+                <li><a href="{% url 'homepage:food' %}" class="li-decor">Food</a></li>
+                <li><a href="{% url 'homepage:toys' %}" class="li-decor">Toys</a></li>       
             </ul>
             <span id="sub-picks-span">
                 <ul class="sub-picks-list">
-                    <li>Promo</li>
-                    <li>Free Shipping</li>
-                    <li>10% Off Deals</li>
+                    <li><a href="{% url 'homepage:promo' %}" class="li-decor">Promo</a></li>
+                    <li><a href="{% url 'homepage:free-shipping' %}" class="li-decor">Free Shipping</a></li>
+                    <li><a href="{% url 'homepage:discounts' %}" class="li-decor">10% Off Deals</a></li>
                 </ul>
             </span>
             <span>
@@ -43,7 +39,7 @@
             <h1>Patong-Patong na Vouchers</h1>
             <p>Araw-Araw na Free Shipping</p>
         </div>
-
+        
         <div class="voucher-section">
             <h2>Free Shipping Vouchers</h2>
 
@@ -52,7 +48,7 @@
                 <p>0 Min. Spend</p>
                 <p>Sitewide</p>
                 <p>Valid Till 23 Nov | T&C</p>
-            </div>
+                </div>
 
             <div class="voucher-card">
                 <h3>100% Free Shipping</h3>
@@ -74,8 +70,6 @@
                 <a href="#" class="claim-button">Claim</a>
             </div>
         </div>
-
-        
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -89,6 +83,4 @@
             });
         });
     </script>
-    
-</body>
-</html>
+{% endblock %}

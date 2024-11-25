@@ -1,28 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Food - E-Commerce Store</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/food.css' %}">
-</head>
-<body>
+{% extends 'master.html' %}
+{% load static %}
 
+{% block title %}Food - Dcatz{% endblock %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'css/subtopic.css' %}">
+    <link rel="stylesheet" href="{% static 'css/itemlist.css' %}">
+    <link rel="stylesheet" href="{% static 'css/background.css' %}">
     <section class="sub-picks-section">
         <div class="sub-picks">
             <ul class="sub-picks-list">
-                <li>Accessories</li>
-                <li>Clothing</li>
-                <li>Furniture</li>
-                <li>Food</li>
-                <li>Toys</li>       
+                <li><a href="{% url 'homepage:accessories' %}" class="li-decor">Accessories</a></li>
+                <li><a href="{% url 'homepage:clothing' %}" class="li-decor">Clothing</a></li>
+                <li><a href="{% url 'homepage:furniture' %}" class="li-decor">Furniture</a></li>
+                <li><a href="{% url 'homepage:food' %}" class="li-decor">Food</a></li>
+                <li><a href="{% url 'homepage:toys' %}" class="li-decor">Toys</a></li>       
             </ul>
             <span id="sub-picks-span">
                 <ul class="sub-picks-list">
-                    <li>Promo</li>
-                    <li>Free Shipping</li>
-                    <li>10% Off Deals</li>
+                    <li><a href="{% url 'homepage:promo' %}" class="li-decor">Promo</a></li>
+                    <li><a href="{% url 'homepage:free-shipping' %}" class="li-decor">Free Shipping</a></li>
+                    <li><a href="{% url 'homepage:discounts' %}" class="li-decor">10% Off Deals</a></li>
                 </ul>
             </span>
             <span>
@@ -38,25 +36,21 @@
         </div>
     </section>
 
-<main>
-    <section class="category-banner">
-        <h1>Shop Food</h1>
-        <p>Cat Food</p>
-    </section>
-
-    <section class="accessories-list">
-        {% for x in all %}
-            <div class="product-item">
-                <img src="{% static 'all-files/' %}{{ x.file_name }}" >
-                <h3>{{ x.item_name }}</h3>
-                <p class="price">₱{{ x.price }}</p>
-                <button class="add-to-cart">Add to Cart</button>
-            </div>
-        {% endfor %}
-    </section>
-</main>
-
-
-
-</body>
-</html>
+    <main>
+        <section class="category-banner">
+            <h1>Shop Food</h1>
+            <p>Cat Food</p>
+        </section>
+        
+        <section class="list">
+            {% for x in all %}
+                <div class="product-item">
+                    <img src="{% static 'all-files/' %}{{ x.file_name }}" alt="Cat Food">
+                    <h3>{{ x.item_name }}</h3>
+                    <p class="price">₱{{ x.price }}</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            {% endfor %}
+        </section>
+    </main>
+{% endblock %}
