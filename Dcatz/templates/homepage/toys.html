@@ -47,10 +47,10 @@
         <section class="list">
             {% for x in all %}
                 <div class="product-item">
-                    <img src="{% static 'all-files/' %}{{ x.file_name }}" alt="Cat Toy">
+                    <img src="{% static 'all-files/' %}{{ x.file_name }}" alt="Cat Toys">
                     <h3>{{ x.item_name }}</h3>
                     <p class="price">${{ x.price }}</p>
-                    <button class="add-to-cart">Add to Cart</button>
+                    <a href="{% url 'homepage:cat_tree' %}?name={{ x.item_name }}&price={{ x.price }}&image={{ x.file_name }}" class="view-product">View Product</a>
                 </div>
             {% endfor %}
         </section>

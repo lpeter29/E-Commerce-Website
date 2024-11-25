@@ -12,4 +12,5 @@ urlpatterns = [
     path('promo/', views.promo, name='promo'),
     path('free-shipping/', views.free_shipping, name='free-shipping'),
     path('discounts/', views.discounts, name='discounts'),
+    path('cat-tree/', views.cat_tree, name='cat_tree'),
 ]
