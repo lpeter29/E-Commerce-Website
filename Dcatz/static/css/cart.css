@@ -10,10 +10,14 @@ body {
     rgba(255,220,127,1) 100%);
     min-height: 100vh;
     font-family: 'Open Sans', sans-serif;
-    display: flex;
+    /* display: flex; */
     justify-content: center;
     align-items: center;
     overflow-y: auto;
+}
+
+footer {
+    display: none;
 }
 
 .page-container {

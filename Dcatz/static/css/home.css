@@ -1,7 +1,8 @@
 /* <---------------------------------- CSS FOR home-page.html ----------------------------------> */
 div.sub-picks {
     margin-left: 5%;
-    color: white;
+    /* color: white;
+    text-decoration: none; */
     margin-top: 10px;
 }
 
@@ -16,6 +17,11 @@ div.sub-picks, ul.sub-picks-list, ul.search-ul, ul.bottom-dots-ul {
         border-left: 2px solid white;
         margin-left: 20px;
     }
+}
+
+.li-decor {
+    color: white;
+    text-decoration: none;
 }
 
 div.search-div {

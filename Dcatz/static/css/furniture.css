@@ -12,6 +12,11 @@ div.sub-picks {
     margin-top: 6%;
 }
 
+.li-decor {
+    color: white;
+    text-decoration: none;
+}
+
 div.sub-picks, ul.sub-picks-list, ul.search-ul, ul.bottom-dots-ul {
     list-style-type: none;
     display: flex;

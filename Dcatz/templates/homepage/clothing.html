@@ -15,14 +15,16 @@
     </section>
 
     <section class="accessories-list">
-        <div class="product-item">
-            <img src="{% static 'homepage/images/clothing1.png' %}" alt="Cat Clothing 1">
-            <h3>Stylish Cat Sweater</h3>
-            <p class="price">$29.99</p>
-            <button class="add-to-cart">Add to Cart</button>
-        </div>
+        {% for x in all %}
+            <div class="product-item">
+                <img src="{% static 'all-files/' %}{{ x.file_name }}" alt="Cat Clothing 1">
+                <h3>{{ x.item_name }}</h3>
+                <p class="price">{{ x.price }}</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+        {% endfor %}
 
-        <div class="product-item">
+        <!-- <div class="product-item">
             <img src="{% static 'homepage/images/clothing2.png' %}" alt="Cat Clothing 2">
             <h3>Cat Raincoat</h3>
             <p class="price">$34.99</p>
@@ -48,7 +50,7 @@
             <h3>Cat Bow Tie</h3>
             <p class="price">$14.99</p>
             <button class="add-to-cart">Add to Cart</button>
-        </div>
+        </div> -->
     </section>
 </body>
 </html>

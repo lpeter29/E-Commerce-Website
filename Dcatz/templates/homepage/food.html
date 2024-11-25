@@ -45,48 +45,14 @@
     </section>
 
     <section class="accessories-list">
-        <div class="product-item">
-            <img src="food1.png" >
-            <h3>pic1</h3>
-            <p class="price">$150.00</p>
-            <button class="add-to-cart">Add to Cart</button>
-        </div>
-
-        <div class="product-item">
-            <img src="food2.png" >
-            <h3>pic2</h3>
-            <p class="price">$75.00</p>
-            <button class="add-to-cart">Add to Cart</button>
-        </div>
-
-        <div class="product-item">
-            <img src="food3.png" >
-            <h3>pic3</h3>
-            <p class="price">$120.00</p>
-            <button class="add-to-cart">Add to Cart</button>
-        </div>
-
-        <div class="product-item">
-            <img src="food4.png" >
-            <h3>pic4</h3>
-            <p class="price">$250.00</p>
-            <button class="add-to-cart">Add to Cart</button>
-        </div>
-
-        <div class="product-item">
-            <img src="food5.png" >
-            <h3>pic5</h3>
-            <p class="price">$60.00</p>
-            <button class="add-to-cart">Add to Cart</button>
-        </div>
-        <div class="product-item">
-            <img src="food6.png" >
-            <h3>pic6</h3>
-            <p class="price">$60.00</p>
-            <button class="add-to-cart">Add to Cart</button>
-      
-        
-
+        {% for x in all %}
+            <div class="product-item">
+                <img src="{% static 'all-files/' %}{{ x.file_name }}" >
+                <h3>{{ x.item_name }}</h3>
+                <p class="price">₱{{ x.price }}</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+        {% endfor %}
     </section>
 </main>
 

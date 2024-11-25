@@ -11,17 +11,17 @@
     <section class="sub-picks-section">
         <div class="sub-picks">
             <ul class="sub-picks-list">
-                <li><a href="{% url 'homepage:accessories' %}">Accessories</a></li>
-                <li><a href="{% url 'homepage:clothing' %}">Clothing</a></li>
-                <li><a href="{% url 'homepage:furniture' %}">Furniture</a></li>
-                <li><a href="{% url 'homepage:food' %}">Food</a></li>
-                <li><a href="{% url 'homepage:toys' %}">Toys</a></li>       
+                <li><a href="{% url 'homepage:accessories' %}" class="li-decor">Accessories</a></li>
+                <li><a href="{% url 'homepage:clothing' %}" class="li-decor">Clothing</a></li>
+                <li><a href="{% url 'homepage:furniture' %}" class="li-decor">Furniture</a></li>
+                <li><a href="{% url 'homepage:food' %}" class="li-decor">Food</a></li>
+                <li><a href="{% url 'homepage:toys' %}" class="li-decor">Toys</a></li>       
             </ul>
             <span id="sub-picks-span">
                 <ul class="sub-picks-list">
-                    <li><a href="{% url 'homepage:promo' %}">Promo</a></li>
-                    <li><a href="{% url 'homepage:free-shipping' %}">Free Shipping</a></li>
-                    <li><a href="{% url 'homepage:discounts' %}">10% Off Deals</a></li>
+                    <li><a href="{% url 'homepage:promo' %}" class="li-decor">Promo</a></li>
+                    <li><a href="{% url 'homepage:free-shipping' %}" class="li-decor">Free Shipping</a></li>
+                    <li><a href="{% url 'homepage:discounts' %}" class="li-decor">10% Off Deals</a></li>
                 </ul>
             </span>
             <span>
@@ -42,70 +42,17 @@
             <h1>Shop Accessories</h1>
             <p>Cat Accessories</p>
         </section>
-
+        
         <section class="accessories-list">
-            <div class="product-item">
-                <img src="{% static 'homepage/Accessories/Accessories/acce7.png' %}" alt="Cat Accessory 1">
-                <h3>Luxury Cat Collar</h3>
-                <p class="price">$150.00</p>
-                <button class="add-to-cart">Add to Cart</button>
-            </div>
+            {% for x in all %}
+                <div class="product-item">
+                    <img src="{% static 'all-files/' %}{{ x.file_name }}" alt="Cat Accessory 1">
+                    <h3>{{ x.item_name }}</h3>
+                    <p class="price">₱{{ x.price }}</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            {% endfor %}
 
-            <div class="product-item">
-                <img src="{% static 'homepage/Accessories/Accessories/acce2.png' %}" alt="Cat Accessory 2">
-                <h3>Designer Cat Bowl</h3>
-                <p class="price">$75.00</p>
-                <button class="add-to-cart">Add to Cart</button>
-            </div>
-
-            <div class="product-item">
-                <img src="{% static 'homepage/Accessories/Accessories/acce8.png' %}" alt="Cat Accessory 3">
-                <h3>Cat Grooming Kit</h3>
-                <p class="price">$120.00</p>
-                <button class="add-to-cart">Add to Cart</button>
-            </div>
-
-            <div class="product-item">
-                <img src="{% static 'homepage/Accessories/Accessories/acce4.png' %}" alt="Cat Accessory 4">
-                <h3>Premium Cat Carrier</h3>
-                <p class="price">$250.00</p>
-                <button class="add-to-cart">Add to Cart</button>
-            </div>
-
-            <div class="product-item">
-                <img src="{% static 'homepage/Accessories/Accessories/acce5.png' %}" alt="Cat Accessory 5">
-                <h3>Cat ID Tag</h3>
-                <p class="price">$60.00</p>
-                <button class="add-to-cart">Add to Cart</button>
-            </div>
-
-            <div class="product-item">
-                <img src="{% static 'homepage/Accessories/Accessories/acce6.png' %}" alt="Cat Accessory 6">
-                <h3>Cat Harness</h3>
-                <p class="price">$60.00</p>
-                <button class="add-to-cart">Add to Cart</button>
-            </div>
-
-            <div class="product-item">
-                <img src="{% static 'homepage/Accessories/Accessories/acce1.png' %}" alt="Cat Accessory 7">
-                <h3>Cat Brush</h3>
-                <p class="price">$60.00</p>
-                <button class="add-to-cart">Add to Cart</button>
-            </div>
-
-            <div class="product-item">
-                <img src="{% static 'homepage/Accessories/Accessories/acce3.png' %}" alt="Cat Accessory 8">
-                <h3>Cat Bell</h3>
-                <p class="price">$60.00</p>
-                <button class="add-to-cart">Add to Cart</button>
-            </div>
-
-            <div class="product-item">
-                <img src="{% static 'homepage/Accessories/Accessories/acce9.png' %}" alt="Cat Accessory 9">
-                <h3>Cat Leash</h3>
-                <p class="price">$45.00</p>
-                <button class="add-to-cart">Add to Cart</button>
-            </div>
         </section>
     </main>
 </body>
