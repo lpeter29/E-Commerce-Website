@@ -1,9 +1,10 @@
 from django.shortcuts import render, loader, redirect, get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from .models import AllFiles, UserProfile, CatAccessories, CatClothing, CatFurniture, CatFood, CatToys
+from django.contrib.auth.decorators import login_required
+from .models import AllFiles, UserProfile, CatAccessories, CatClothing, CatFurniture, CatFood, CatToys, CartItem
 
 def sign_up(request):
     if request.method == 'POST':
@@ -64,18 +65,66 @@ def home_page(request):
     
     return render(request, 'home-page.html')
 
+@login_required
 def cart(request):
-    return render(request, 'cart.html')
+    cart_items = CartItem.objects.filter(user=request.user).order_by('-date_added')
+    total = sum(item.total_price() for item in cart_items)
+    
+    context = {
+        'cart_items': cart_items,
+        'total': total
+    }
+    return render(request, 'cart.html', context)
 
-# def add_item_to_cart(request, item_id):
-#     added_item = get_object_or_404(AllFiles, id=item_id)
+@login_required
+def add_to_cart(request):
+    if request.method == 'POST':
+        item_name = request.POST.get('item_name')
+        file_name = request.POST.get('file_name')
+        price = request.POST.get('price')
+        quantity = int(request.POST.get('quantity', 1))
+        
+        # Check if item already exists in cart
+        cart_item = CartItem.objects.filter(user=request.user, item_name=item_name).first()
+        
+        if cart_item:
+            # Update quantity if item exists
+            cart_item.quantity += quantity
+            cart_item.save()
+        else:
+            # Create new cart item
+            CartItem.objects.create(
+                user=request.user,
+                item_name=item_name,
+                file_name=file_name,
+                price=price,
+                quantity=quantity
+            )
+        
+        messages.success(request, 'Item added to cart successfully!')
+        return JsonResponse({'status': 'success'})
+    
+    return JsonResponse({'status': 'error'})
 
-#     CartItems.objects.create(
-#         cart_item_name = added_item.item_name,
-#         cart_file_name = added_item.file_name,
-#         cart_price = added_item.price
-#     )
-#     return redirect('homepage/accessories.html')
+@login_required
+def remove_from_cart(request, item_id):
+    cart_item = get_object_or_404(CartItem, id=item_id, user=request.user)
+    cart_item.delete()
+    messages.success(request, 'Item removed from cart successfully!')
+    return redirect('cart')
+
+@login_required
+def update_cart_quantity(request, item_id):
+    if request.method == 'POST':
+        quantity = int(request.POST.get('quantity', 1))
+        cart_item = get_object_or_404(CartItem, id=item_id, user=request.user)
+        cart_item.quantity = quantity
+        cart_item.save()
+        return JsonResponse({
+            'status': 'success',
+            'total': str(cart_item.total_price())
+        })
+    return JsonResponse({'status': 'error'})
 
 def about(request):
     return render(request, 'about.html')

@@ -5,12 +5,12 @@
 Cart
 {% endblock %}
 
-
-<!-- <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet"> -->
-
 {% block content %}
-<link rel="stylesheet" type="text/css" href="{% static 'css\cart.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/cart.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
 <div class="page-container">
+    {% if cart_items %}
     <div class="cart-container">
         <table class="cart-table">
             <thead>
@@ -18,66 +18,54 @@ Cart
                     <th class="select-col"></th>
                     <th class="item-col">Item(s)</th>
                     <th>Unit Price</th>
-                    <th>Variation</th>
+                    <th>Variety</th>
                     <th>Quantity</th>
                     <th>Total</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
-                <tr class="item1">
-                    <td><input type="checkbox" class="item-checkbox"></td>
+                {% for item in cart_items %}
+                <tr class="item{{ forloop.counter }}">
+                    <td><input type="checkbox" class="item-checkbox" onchange="updateCartTotal()"></td>
                     <td class="item-info">
-                        <img src="{% static 'cart/Item2.png' %}" alt="Kitty Bat Wings">
+                        <img src="{% static 'all-files/' %}{{ item.file_name }}" alt="{{ item.item_name }}">
                         <br>
-                        <span class="item-name">Kitty Bat Wings</span>
+                        <span class="item-name">{{ item.item_name }}</span>
                     </td>
-                    <td class="unit-price">₱299.00</td>
-                    <td class="variety">Black</td>
+                    <td class="unit-price">${{ item.price }}</td>
                     <td>
-                        <div class="quantity-wrapper">
-                            <button class="qty-btn" onclick="decrementQty(1)">-</button>
-                            <input type="number" class="qty-input" id="qty1" value="1" min="1" max="10" onchange="updateTotal(1)">
-                            <button class="qty-btn" onclick="incrementQty(1)">+</button>
+                        <div class="variety-wrapper">
+                            <button class="variety-btn" onclick="toggleVarietyDropdown({{ item.id }})">
+                                <span class="current-variety">Select</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div id="variety-dropdown-{{ item.id }}" class="variety-dropdown">
+                                <div class="variety-options">
+                                    <div class="variety-option" onclick="selectVariety({{ item.id }}, 'Small')">Small</div>
+                                    <div class="variety-option" onclick="selectVariety({{ item.id }}, 'Medium')">Medium</div>
+                                    <div class="variety-option" onclick="selectVariety({{ item.id }}, 'Large')">Large</div>
+                                    <div class="variety-option" onclick="selectVariety({{ item.id }}, 'X-Large')">X-Large</div>
+                                </div>
+                            </div>
                         </div>
                     </td>
-                    <td class="item-total" id="total1">₱299.00</td>
-                </tr>
-                <tr class="item2">
-                    <td><input type="checkbox" class="item-checkbox"></td>
-                    <td class="item-info">
-                        <img src="{% static 'cart/Item1.png' %}" alt="Cat Tree">
-                        <br>
-                        <span class="item-name">Cat Tree</span>
-                    </td>
-                    <td class="unit-price">₱1,499.00</td>
-                    <td class="variety">Beige</td>
                     <td>
                         <div class="quantity-wrapper">
-                            <button class="qty-btn" onclick="decrementQty(2)">-</button>
-                            <input type="number" class="qty-input" id="qty2" value="1" min="1" max="10" onchange="updateTotal(2)">
-                            <button class="qty-btn" onclick="incrementQty(2)">+</button>
+                            <button class="qty-btn" onclick="updateQuantity({{ item.id }}, {{ item.quantity|add:'-1' }})">-</button>
+                            <input type="number" class="qty-input" value="{{ item.quantity }}" min="1" max="10" 
+                                onchange="updateQuantity({{ item.id }}, this.value)">
+                            <button class="qty-btn" onclick="updateQuantity({{ item.id }}, {{ item.quantity|add:'1' }})">+</button>
                         </div>
                     </td>
-                    <td class="item-total" id="total2">₱1,499.00</td>
-                </tr>
-                <tr class="item3">
-                    <td><input type="checkbox" class="item-checkbox"></td>
-                    <td class="item-info">
-                        <img src="{% static 'cart/Item3.png' %}" alt="Whiskas Cat Food">
-                        <br>
-                        <span class="item-name">Whiskas Cat Food</span>
-                    </td>
-                    <td class="unit-price">₱199.00</td>
-                    <td class="variety">Tuna</td>
+                    <td class="item-total" id="total{{ item.id }}">${{ item.total_price }}</td>
                     <td>
-                        <div class="quantity-wrapper">
-                            <button class="qty-btn" onclick="decrementQty(3)">-</button>
-                            <input type="number" class="qty-input" id="qty3" value="1" min="1" max="10" onchange="updateTotal(3)">
-                            <button class="qty-btn" onclick="incrementQty(3)">+</button>
-                        </div>
+                        <a href="{% url 'homepage:remove_from_cart' item.id %}" class="remove-btn" title="Remove Item">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
                     </td>
-                    <td class="item-total" id="total3">₱199.00</td>
                 </tr>
+                {% endfor %}
             </tbody>
         </table>
 
@@ -88,53 +76,102 @@ Cart
             </div>
             <div class="total-section">
                 <span>Total Price (<span id="itemCount">0</span> Items): </span>
-                <span id="cartTotal">₱0.00</span>
+                <span id="cartTotal">$0.00</span>
                 <button class="checkout-btn" onclick="proceedToCheckout()">Check Out</button>
             </div>
         </div>
     </div>
+    {% else %}
+    <div class="empty-cart">
+        <div class="empty-cart-content">
+            <img src="{% static 'images/empty-cart.png' %}" alt="Empty Cart">
+            <h2>Your Cart is Empty</h2>
+            <p>Looks like you haven't added any items to your cart yet. Browse our products and find something you love!</p>
+            <a href="{% url 'homepage:accessories' %}" class="continue-shopping">Continue Shopping</a>
+        </div>
+    </div>
+    {% endif %}
 </div>
 
 <script>
-function incrementQty(itemId) {
-    const input = document.getElementById('qty' + itemId);
-    if (input.value < 10) {
-        input.value = parseInt(input.value) + 1;
-        updateTotal(itemId);
-    }
-}
-
-function decrementQty(itemId) {
-    const input = document.getElementById('qty' + itemId);
-    if (input.value > 1) {
-        input.value = parseInt(input.value) - 1;
-        updateTotal(itemId);
-    }
-}
-
-function updateTotal(itemId) {
-    const qty = document.getElementById('qty' + itemId).value;
-    const price = parseFloat(document.querySelector('.item' + itemId + ' .unit-price').textContent.replace('₱', '').replace(',', ''));
-    const total = qty * price;
-    document.getElementById('total' + itemId).textContent = '₱' + total.toLocaleString('en-PH', {minimumFractionDigits: 2});
-    updateCartTotal();
-}
-
-function updateCartTotal() {
-    let total = 0;
-    let count = 0;
-    const checkboxes = document.querySelectorAll('.item-checkbox:checked');
+function updateQuantity(itemId, newQuantity) {
+    if (newQuantity < 1 || newQuantity > 10) return;
     
-    checkboxes.forEach(checkbox => {
-        const row = checkbox.closest('tr');
-        const itemTotal = parseFloat(row.querySelector('.item-total').textContent.replace('₱', '').replace(',', ''));
-        total += itemTotal;
-        count++;
+    fetch(`{% url 'homepage:update_cart_quantity' 0 %}`.replace('0', itemId), {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'X-CSRFToken': getCookie('csrftoken')
+        },
+        body: `quantity=${newQuantity}`
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            location.reload();
+        }
     });
-
-    document.getElementById('cartTotal').textContent = '₱' + total.toLocaleString('en-PH', {minimumFractionDigits: 2});
-    document.getElementById('itemCount').textContent = count;
 }
+
+function toggleVarietyDropdown(itemId) {
+    const dropdown = document.getElementById(`variety-dropdown-${itemId}`);
+    const button = dropdown.previousElementSibling;
+    const icon = button.querySelector('i');
+    const allDropdowns = document.querySelectorAll('.variety-dropdown');
+    const allButtons = document.querySelectorAll('.variety-btn');
+    
+    // Close all other dropdowns and reset their icons/states
+    allDropdowns.forEach((d, index) => {
+        if (d !== dropdown && d.classList.contains('show')) {
+            d.classList.remove('show');
+            allButtons[index].classList.remove('active');
+            allButtons[index].querySelector('i').classList.remove('fa-chevron-up');
+            allButtons[index].querySelector('i').classList.add('fa-chevron-down');
+        }
+    });
+    
+    // Toggle current dropdown
+    dropdown.classList.toggle('show');
+    button.classList.toggle('active');
+    
+    // Toggle icon
+    if (dropdown.classList.contains('show')) {
+        icon.classList.remove('fa-chevron-down');
+        icon.classList.add('fa-chevron-up');
+    } else {
+        icon.classList.remove('fa-chevron-up');
+        icon.classList.add('fa-chevron-down');
+    }
+}
+
+function selectVariety(itemId, variety) {
+    const dropdown = document.getElementById(`variety-dropdown-${itemId}`);
+    const btn = dropdown.previousElementSibling;
+    const currentVariety = btn.querySelector('.current-variety');
+    
+    currentVariety.textContent = variety;
+    toggleVarietyDropdown(itemId);
+    
+    // Add visual feedback
+    currentVariety.classList.add('selected');
+    setTimeout(() => currentVariety.classList.remove('selected'), 500);
+}
+
+// Close dropdowns when clicking outside
+document.addEventListener('click', function(e) {
+    if (!e.target.closest('.variety-wrapper')) {
+        document.querySelectorAll('.variety-dropdown').forEach(dropdown => {
+            if (dropdown.classList.contains('show')) {
+                const button = dropdown.previousElementSibling;
+                button.classList.remove('active');
+                const icon = button.querySelector('i');
+                dropdown.classList.remove('show');
+                icon.classList.remove('fa-chevron-up');
+                icon.classList.add('fa-chevron-down');
+            }
+        });
+    }
+});
 
 function toggleAll() {
     const selectAll = document.getElementById('selectAll');
@@ -145,9 +182,21 @@ function toggleAll() {
     updateCartTotal();
 }
 
-document.querySelectorAll('.item-checkbox').forEach(checkbox => {
-    checkbox.addEventListener('change', updateCartTotal);
-});
+function updateCartTotal() {
+    let total = 0;
+    let count = 0;
+    const checkboxes = document.querySelectorAll('.item-checkbox:checked');
+    
+    checkboxes.forEach(checkbox => {
+        const row = checkbox.closest('tr');
+        const itemTotal = parseFloat(row.querySelector('.item-total').textContent.replace('$', ''));
+        total += itemTotal;
+        count++;
+    });
+    
+    document.getElementById('cartTotal').textContent = '$' + total.toFixed(2);
+    document.getElementById('itemCount').textContent = count;
+}
 
 function proceedToCheckout() {
     const selectedItems = document.querySelectorAll('.item-checkbox:checked').length;
@@ -157,5 +206,25 @@ function proceedToCheckout() {
     }
     // Add your checkout logic here
 }
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+// Initialize total on page load
+document.addEventListener('DOMContentLoaded', function() {
+    updateCartTotal();
+});
 </script>
 {% endblock %}
