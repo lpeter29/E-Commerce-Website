@@ -375,11 +375,17 @@ Checkout
             }
 
         } else if (paymentMethod.value === "cod") {
-            // Cash on Delivery (No further validation needed for COD)
-            alert("Order placed successfully! You will pay when you receive the order.");
-            window.location.href = "/home-page";
-            return; // Skip further checks for COD
-        }
+            const isConfirmed = confirm("Are you sure you want to place the order with Cash on Delivery?");
+            
+            if (isConfirmed) {
+                alert("Order placed successfully! You will pay when you receive the order.");
+                window.location.href = "/home-page"; // Redirect to the home page or desired URL
+                return; // Skip further checks for COD
+            } else {
+                alert("Order placement canceled.");
+                return; // Stop further execution if the user cancels
+            }
+        }        
 
         // If validation passed, proceed with the order; otherwise, prevent submission
         if (!isValid) {
@@ -388,8 +394,14 @@ Checkout
         }
 
         // Proceed with the order (e.g., submit form, etc.)
-        alert("Your order has been placed successfully!");
-        window.location.href = "/home-page";
+        const isConfirmed = confirm("Are you sure you want to place the order?");
+    
+        if (isConfirmed) {
+            alert("Your order has been placed successfully!");
+            window.location.href = "/home-page"; // Redirect to the home page or desired URL
+        } else {
+            alert("Order placement canceled.");
+        }
     }
 
     // Function to handle cancel button click
