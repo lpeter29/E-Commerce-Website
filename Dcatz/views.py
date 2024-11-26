@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .models import AllFiles, UserProfile, CatAccessories, CatClothing, CatFurniture, CatFood, CatToys, CartItem
+from decimal import Decimal
 
 def sign_up(request):
     if request.method == 'POST':
@@ -212,3 +213,45 @@ def cat_tree(request):
         'image': current_image
     }
     return render(request, 'homepage/cat_tree.html', context)
+
+@login_required
+def checkout(request):
+    # Get selected item IDs from the query parameters
+    selected_ids = request.GET.get('selected_ids', '')
+    selected_ids = selected_ids.split(',') if selected_ids else []
+
+    # Fetch selected cart items
+    selected_items = CartItem.objects.filter(id__in=selected_ids, user=request.user)
+
+    # Calculate total price for the selected items (subtotal)
+    subtotal = sum(Decimal(item.total_price()) for item in selected_items)
+
+    # Initialize savings to 0
+    savings = Decimal('0.00')
+
+    # Check if promo code is provided and valid
+    promo_code = request.GET.get('promo_code', '').strip().upper()
+    if promo_code == 'DESIGN10':
+        # Apply 10% discount
+        savings = subtotal * Decimal('0.10')
+
+    # Define shipping cost (default to ₱50.00, as a Decimal)
+    shipping = Decimal('50.00')
+
+    # Calculate total (Subtotal - Savings + Shipping)
+    total = subtotal - savings + shipping
+
+    # Calculate the total quantity of items
+    total_quantity = sum(item.quantity for item in selected_items)
+
+    # Pass the necessary context to the template
+    context = {
+        'selected_items': selected_items,
+        'subtotal': subtotal,
+        'savings': savings,
+        'shipping': shipping,
+        'total': total,
+        'total_quantity': total_quantity,  # Add total_quantity to the context
+    }
+
+    return render(request, 'checkout.html', context)

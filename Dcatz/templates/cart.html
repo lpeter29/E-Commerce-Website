@@ -26,7 +26,7 @@ Cart
             </thead>
             <tbody>
                 {% for item in cart_items %}
-                <tr class="item{{ forloop.counter }}">
+                <tr class="item{{ forloop.counter }}" data-item-id="{{ item.id }}">
                     <td><input type="checkbox" class="item-checkbox" onchange="updateCartTotal()"></td>
                     <td class="item-info">
                         <img src="{% static 'all-files/' %}{{ item.file_name }}" alt="{{ item.item_name }}">
@@ -199,13 +199,22 @@ function updateCartTotal() {
 }
 
 function proceedToCheckout() {
-    const selectedItems = document.querySelectorAll('.item-checkbox:checked').length;
-    if (selectedItems === 0) {
-        alert('Please select at least one item to checkout');
+    const selectedItems = document.querySelectorAll('.item-checkbox:checked');
+    if (selectedItems.length === 0) {
+        alert('Please select at least one item to checkout.');
         return;
     }
-    // Add your checkout logic here
+
+    // Collect selected item IDs
+    const selectedIds = Array.from(selectedItems).map(checkbox =>
+        checkbox.closest('tr').getAttribute('data-item-id')
+    );
+
+    // Redirect to checkout with selected IDs
+    const url = '/checkout/?selected_ids=' + selectedIds.join(',');
+    window.location.href = url;
 }
+
 
 function getCookie(name) {
     let cookieValue = null;

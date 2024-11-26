@@ -1,0 +1,537 @@
+{% extends 'master.html' %}
+{% load static %}
+
+{% block title %}
+Checkout
+{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/checkout.css' %}">
+
+<div class="page-container">
+    <div class="checkout-grid">
+        <!-- Column 1: Contact Information and Payment and Billing -->
+        <div class="checkout-column checkout-column-left">
+            <!-- Contact Information Section -->
+            <div class="checkout-container">
+                <div class="checkout-header" onclick="toggleSection('contact-section')">
+                    <h2>1. Contact Information</h2>
+                    <span class="arrow">&#x25BC;</span> <!-- Down arrow icon initially -->
+                </div>
+                <div id="contact-section" class="checkout-content">
+                    <form id="contact-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <input type="text" id="first-name" name="first-name" placeholder="First Name*" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="last-name" name="last-name" placeholder="Last Name*" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <input type="text" id="street-address" name="street-address" placeholder="Street Address*" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="apt-suite" name="apt-suite" placeholder="Apt, Suite, etc. (Optional)">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <input type="text" id="city" name="city" placeholder="City*" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="region" name="region" placeholder="Region*" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <input type="text" id="zip-code" name="zip-code" placeholder="Zip Code*" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="tel" id="phone-number" name="phone-number" placeholder="Phone Number*" required>
+                            </div>
+                        </div>                        
+                    </form>
+                    <button class="continue-btn" onclick="validateForm()">Continue</button>
+                </div>
+            </div>
+
+            <!-- Payment and Billing Section (Initially disabled) -->
+            <div class="checkout-container" id="payment-container" style="pointer-events: none; opacity: 0.5;">
+                <div class="checkout-header" onclick="toggleSection('payment-section')" id="payment-header" style="cursor: not-allowed;">
+                    <h2>2. Payment and Billing</h2>
+                    <span class="arrow">&#x25BC;</span> <!-- Down arrow icon initially -->
+                </div>
+                <div id="payment-section" class="checkout-content">
+                    <form id="payment-form">
+                        <div class="payment-method">
+                            <label>
+                                <input type="radio" name="payment-method" value="credit-card" onclick="togglePaymentInputs('credit-card')" disabled>
+                                Credit or Debit Card
+                            </label>
+                            <div id="credit-card-inputs" class="payment-inputs" style="display: none;">
+                                <div class="form-group">
+                                    <label for="card-number">Card Number*</label>
+                                    <input type="text" id="card-number" name="card-number" placeholder="**** **** **** ****" maxlength="19" disabled>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="expiry-date">Expiry Date (MM/YY)*</label>
+                                        <input type="text" id="expiry-date" name="expiry-date" placeholder="MM / YY" maxlength="5" disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="cvc">CVC*</label>
+                                        <input type="text" id="cvc" name="cvc" placeholder="***" maxlength="3" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                        
+
+                        <div class="payment-method">
+                            <label>
+                                <input type="radio" name="payment-method" value="gcash" onclick="togglePaymentInputs('gcash')" disabled>
+                                GCash
+                            </label>
+                            <div id="gcash-inputs" class="payment-inputs" style="display: none;">
+                                <div class="form-group">
+                                    <label for="gcash-phone-number">Phone Number*</label>
+                                    <input type="tel" id="gcash-phone-number" name="gcash-phone-number" placeholder="0917 123 4567" maxlength="13" disabled>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="payment-method">
+                            <label>
+                                <input type="radio" name="payment-method" value="cod" onclick="togglePaymentInputs('cod')" disabled>
+                                Cash on Delivery
+                            </label>
+                            <div id="cod-inputs" class="payment-inputs" style="display: none;">
+                                <p>Pay when you receive the order.</p>
+                            </div>    
+                        </div>
+                    </form>
+                </div>
+                <!-- Cancel and Place Order Buttons (Initially hidden) -->
+                <div id="payment-footer" class="checkout-footer" style="display: none;">
+                    <button class="cancel-btn" onclick="handleCancelOrder()">Cancel Order</button>
+                    <button class="confirm-btn" onclick="validatePlaceOrder()">Place Order</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Column 2: Order Summary -->
+        <div class="checkout-column checkout-column-right">
+            <div class="checkout-container">
+                <h2>
+                    Order Summary
+                    <a href="{% url 'cart' %}" class="edit-cart-btn">Edit Cart</a> <!-- Edit Cart Button -->
+                </h2>
+
+                <div class="order-summary">
+                    <table class="order-summary-table">
+                        <thead>
+                            <tr>
+                                <td colspan="3" class="divider"></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if selected_items %}
+                            <tr>
+                                <td colspan="3" style="text-align: left; padding: 10px 0;">
+                                    {% if selected_items %}
+                                    <p><strong>{{ total_quantity }} items</strong></p>
+                                </td>
+                            </tr>
+                            {% endif %}
+                            {% for item in selected_items %}
+                            <tr>
+                                <td class="product-image">
+                                    <img src="{% static 'all-files/' %}{{ item.file_name }}" alt="{{ item.item_name }}">
+                                </td>
+                                <td class="product-name-quantity">
+                                    <div>{{ item.item_name }}</div>
+                                    <div>Qty: {{ item.quantity }}</div>
+                                </td>
+                                <td class="product-price" style="text-align: right;">₱{{ item.price }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="3" class="divider"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <input type="text" placeholder="Promo Code" class="promo-code-input" id="promo-code-input">
+                                </td>
+                                <td>
+                                    <button class="apply-btn" id="apply-btn" disabled>Apply</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" class="divider"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><strong>Subtotal</strong></td>
+                                <td style="text-align: right;" id="subtotal-display"><strong>₱{{ subtotal }}</strong></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><strong>Savings</strong></td>
+                                <td style="text-align: right;" id="savings-display"><strong>₱{{ savings }}</strong></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><strong>Shipping</strong></td>
+                                <td style="text-align: right;"><strong style="color: red;">₱{{ shipping }}</strong></td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" class="divider"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><strong style="font-size: 1.5em;">Total</strong></td>
+                                <td style="text-align: right;"><strong style="font-size: 1.5em;" id="total-display">₱{{ total }}</strong></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                                               
+                                                     
+                {% else %}
+                <p>No items selected for checkout.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function validateForm() {
+        const requiredFields = [
+            'first-name', 'last-name', 'street-address', 'city', 'region', 'zip-code', 'phone-number'
+        ];
+        let isValid = true;
+        let showErrorAlert = false; // Flag to track if an alert has been shown
+    
+        // Check each required field
+        requiredFields.forEach(field => {
+            const input = document.getElementById(field);
+            
+            if (input) {
+                // Add event listener to remove red border when input is not empty
+                input.addEventListener('input', () => {
+                    if (input.value.trim() !== "") {
+                        input.style.border = "";  // Remove red border if input is filled
+                    }
+                });
+    
+                // If the field is empty, highlight it with a red border
+                if (input.value.trim() === "") {
+                    isValid = false;
+                    input.style.border = "2px solid red";
+                }
+            }
+        });
+    
+        // Validate zip code (exactly 4 digits)
+        const zipCode = document.getElementById('zip-code').value;
+        if (zipCode && (zipCode.length !== 4 || !/^\d{4}$/.test(zipCode))) {
+            isValid = false;
+            document.getElementById('zip-code').style.border = "2px solid red"; // Highlight invalid zip code
+            if (!showErrorAlert) {
+                alert("Please enter a valid 4-digit zip code.");
+                showErrorAlert = true; // Set flag to true to prevent other alerts
+            }
+        }
+    
+        // Validate phone number (exactly 11 digits, ignore spaces)
+        const phoneNumber = document.getElementById('phone-number').value.replace(/\s+/g, ''); // Remove spaces
+        if (phoneNumber && (phoneNumber.length !== 11 || !/^\d{11}$/.test(phoneNumber))) {
+            isValid = false;
+            document.getElementById('phone-number').style.border = "2px solid red"; // Highlight invalid phone number
+            if (!showErrorAlert) {
+                alert("Please enter a valid 11-digit phone number.");
+                showErrorAlert = true; // Set flag to true to prevent other alerts
+            }
+        }
+    
+        // If all required fields are valid, proceed to payment section
+        if (isValid && !showErrorAlert) {
+
+            const isConfirmed = confirm("Are you sure this is correct?");
+
+            if (isConfirmed) {
+                alert("Form is valid. Proceeding to payment...");
+
+                const formFields = requiredFields.concat(['apt-suite']); // Add apt-suite to the list of fields to disable
+                formFields.forEach(field => {
+                    const input = document.getElementById(field);
+                    if (input) input.disabled = true;  // Disable the input field
+                });
+
+                // Disable the Place Order button
+                const continueButton = document.querySelector(".continue-btn");
+                if (continueButton) {
+                    continueButton.disabled = true;  // Disable Place Order button
+                }
+                enablePaymentSection();
+                } else {
+                    // If not confirmed, you can either keep the form open or do nothing
+                    console.log("Form submission canceled.");
+            }
+        } else if (!showErrorAlert) {
+            alert("Please fill in all required fields correctly.");
+        }
+    }    
+
+    // Enable the Payment and Billing section
+    function enablePaymentSection() {
+        const paymentContainer = document.getElementById('payment-container');
+        const paymentHeader = document.getElementById('payment-header');
+        
+        paymentContainer.style.pointerEvents = 'auto';
+        paymentContainer.style.opacity = '1';
+        paymentHeader.style.cursor = 'pointer';
+
+        // Enable the payment method options
+        const paymentInputs = document.querySelectorAll('.payment-method input');
+        paymentInputs.forEach(input => {
+            input.disabled = false;
+        });
+    }
+
+    let showErrorAlert = false; // To prevent multiple alerts from showing
+
+    // Add event listeners to enable inputs and show the payment method when selected
+    function togglePaymentInputs(paymentMethod) {
+        resetPaymentFields(); // Reset fields when switching
+
+        // Hide all payment input fields
+        document.getElementById('credit-card-inputs').style.display = 'none';
+        document.getElementById('gcash-inputs').style.display = 'none';
+        document.getElementById('cod-inputs').style.display = 'none';
+
+        // Enable the appropriate inputs based on the payment method selected
+        if (paymentMethod === 'credit-card') {
+            document.getElementById('card-number').disabled = false;
+            document.getElementById('expiry-date').disabled = false;
+            document.getElementById('cvc').disabled = false;
+            document.getElementById('credit-card-inputs').style.display = 'block'; // Show credit card inputs
+        } else if (paymentMethod === 'gcash') {
+            document.getElementById('gcash-phone-number').disabled = false;
+            document.getElementById('gcash-inputs').style.display = 'block'; // Show GCash inputs
+        } else if (paymentMethod === 'cod') {
+            document.getElementById('cod-inputs').style.display = 'block'; // Show COD text
+        }
+    }
+
+    // Reset all payment fields to hide input fields and error styling
+    function resetPaymentFields() {
+        document.getElementById('card-number').style.border = "";
+        document.getElementById('expiry-date').style.border = "";
+        document.getElementById('cvc').style.border = "";
+        document.getElementById('gcash-phone-number').style.border = "";
+    }
+
+    // Function to validate payment and billing section before proceeding with the order
+    function validatePlaceOrder() {
+        let isValid = true;
+        const paymentMethod = document.querySelector('input[name="payment-method"]:checked'); // Get the selected payment method
+
+        // Check if a payment method is selected
+        if (!paymentMethod) {
+            alert("Please select a payment method.");
+            return; // Stop further validation if no payment method is selected
+        }
+
+        // Reset all error styles
+        resetPaymentFields();
+
+        // Validate based on selected payment method
+        if (paymentMethod.value === "credit-card") {
+            // Credit card validation
+            const cardNumber = document.getElementById('card-number').value.replace(/\s+/g, ''); // Remove spaces
+            const expiryDate = document.getElementById('expiry-date').value;
+            const cvc = document.getElementById('cvc').value;
+
+            // Validate all credit card fields
+            if (!cardNumber || cardNumber.length !== 16 || !/^\d{16}$/.test(cardNumber)) {
+                alert("Please enter a valid 16-digit card number.");
+                isValid = false;
+            } else if (!expiryDate || !/^\d{2}\/\d{2}$/.test(expiryDate)) {
+                alert("Please enter a valid expiry date in MM/YY format.");
+                isValid = false;
+            } else if (!cvc || cvc.length !== 3 || !/^\d{3}$/.test(cvc)) {
+                alert("Please enter a valid 3-digit CVC.");
+                isValid = false;
+            }
+
+        } else if (paymentMethod.value === "gcash") {
+            // GCash validation
+            const phoneNumber = document.getElementById('gcash-phone-number').value.replace(/\s+/g, ''); // Remove spaces
+
+            if (!phoneNumber || phoneNumber.length !== 11 || !/^\d{11}$/.test(phoneNumber)) {
+                alert("Please enter a valid 11-digit phone number for GCash.");
+                isValid = false;
+            }
+
+        } else if (paymentMethod.value === "cod") {
+            // Cash on Delivery (No further validation needed for COD)
+            alert("Order placed successfully! You will pay when you receive the order.");
+            window.location.href = "/home-page";
+            return; // Skip further checks for COD
+        }
+
+        // If validation passed, proceed with the order; otherwise, prevent submission
+        if (!isValid) {
+            showErrorAlert = false; // Reset flag to allow alerts again
+            return;
+        }
+
+        // Proceed with the order (e.g., submit form, etc.)
+        alert("Your order has been placed successfully!");
+        window.location.href = "/home-page";
+    }
+
+    // Function to handle cancel button click
+    function handleCancelOrder() {
+        // Prompt user if they are sure they want to cancel
+        const isConfirmed = confirm("Are you sure you want to cancel? All progress will be lost.");
+        
+        if (isConfirmed) {
+            // Show confirmation message that the order has been canceled
+            alert("Your order has been canceled.");
+
+            // Redirect to home page or any other page you want
+            window.location.href = "/home-page"; // You can change "/home" to the desired URL
+        }
+    }
+
+    const promoCodeInput = document.getElementById('promo-code-input');
+    const applyBtn = document.getElementById('apply-btn');
+    const subtotalDisplay = document.getElementById('subtotal-display');
+    const savingsDisplay = document.getElementById('savings-display');
+    const totalDisplay = document.getElementById('total-display');
+    
+    // Disable the Apply button when the input is empty
+    promoCodeInput.addEventListener('input', function() {
+        if (promoCodeInput.value.trim() === "") {
+            applyBtn.disabled = true;
+        } else {
+            applyBtn.disabled = false;
+        }
+    });
+
+    // Handle the Apply button click
+    applyBtn.addEventListener('click', function() {
+        const promoCode = promoCodeInput.value.trim().toUpperCase();
+        let subtotal = parseFloat(subtotalDisplay.textContent.replace('₱', '').trim());
+        let savings = 0;
+        let total = subtotal;
+
+        if (promoCode === "DESIGN10") {
+            // Apply 10% discount if promo code is DESIGN10
+            savings = subtotal * 0.10; // 10% discount
+            total = subtotal - savings; // Update total
+            alert("Promo code applied: 10% off your subtotal!");
+        } else {
+            // Show alert if the promo code is invalid
+            alert("Invalid promo code!");
+            return;  // Stop the function if the promo code is invalid
+        }
+
+        // Update the savings and total displays dynamically
+        savingsDisplay.textContent = `₱${savings.toFixed(2)}`;
+        totalDisplay.textContent = `₱${total.toFixed(2)}`;
+
+        // If savings is not 0.00, make the savings text green and show a minus sign
+        if (savings > 0) {
+            savingsDisplay.style.color = "green";
+            savingsDisplay.textContent = `-₱${savings.toFixed(2)}`;
+        } else {
+            savingsDisplay.style.color = "black"; // Reset to default color if no savings
+        }
+
+        // Disable the Promo Code input and Apply button after applying the code
+        promoCodeInput.disabled = true;
+        applyBtn.disabled = true;
+    });
+
+
+    // Auto-format for phone number (11 digits, with spaces in the right places)
+    document.getElementById('phone-number').addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\D/g, ''); // Remove non-digit characters
+        if (value.length > 11) value = value.slice(0, 11); // Allow only 11 digits
+        e.target.value = value.replace(/(\d{1,4})(\d{0,3})(\d{0,4})/, function(_, g1, g2, g3) {
+            if (g2) g2 = " " + g2;
+            if (g3) g3 = " " + g3;
+            return g1 + g2 + g3;
+        });
+    });
+    
+    // Auto-format for GCash phone number
+    document.getElementById('gcash-phone-number').addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\D/g, ''); // Remove non-digit characters
+        if (value.length > 11) value = value.slice(0, 11); // Allow only 11 digits
+        e.target.value = value.replace(/(\d{1,4})(\d{0,3})(\d{0,4})/, function(_, g1, g2, g3) {
+            if (g2) g2 = " " + g2;
+            if (g3) g3 = " " + g3;
+            return g1 + g2 + g3;
+        });
+    });
+    
+    // Auto-format for credit card number
+    document.getElementById('card-number').addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\D/g, ''); // Remove non-digit characters
+        if (value.length > 16) value = value.slice(0, 16); // Limit to 16 digits
+        e.target.value = value.replace(/(\d{1,4})(\d{0,4})(\d{0,4})(\d{0,4})/, function(_, g1, g2, g3, g4) {
+            if (g2) g2 = " " + g2;
+            if (g3) g3 = " " + g3;
+            if (g4) g4 = " " + g4;
+            return g1 + g2 + g3 + g4;
+        });
+    });
+    
+    // Auto-format for expiry date (MM/YY)
+    document.getElementById('expiry-date').addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\D/g, ''); // Remove non-digit characters
+        if (value.length > 5) value = value.slice(0, 4); // Limit to MM/YY format
+        e.target.value = value.replace(/(\d{1,2})(\d{0,2})/, function(_, g1, g2) {
+            if (g2) g2 = "/" + g2;
+            return g1 + g2;
+        });
+    });
+    
+    // CVC (Card Verification Code) validation (only 3 digits allowed)
+    document.getElementById('cvc').addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\D/g, ''); // Remove non-digit characters
+        if (value.length > 3) value = value.slice(0, 3); // Limit to 3 digits
+        e.target.value = value; // Update the CVC input with the formatted value
+    });
+
+    // Zip Code validation (only 4 digits allowed)
+    document.getElementById('zip-code').addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\D/g, ''); // Remove non-digit characters
+        if (value.length > 4) value = value.slice(0, 4); // Limit to 4 digits
+        e.target.value = value; // Update the zip code input with the formatted value
+    });
+
+    // Function to toggle sections
+    function toggleSection(sectionId) {
+        const section = document.getElementById(sectionId);
+        const arrow = section.previousElementSibling.querySelector('.arrow');
+        const footer = document.getElementById('payment-footer');
+
+        if (section.style.display === 'block') {
+            section.style.display = 'none';
+            arrow.innerHTML = '&#x25BC;'; // Down arrow
+            footer.style.display = 'none'; // Hide buttons when section is collapsed
+        } else {
+            section.style.display = 'block';
+            arrow.innerHTML = '&#x25B2;'; // Up arrow
+            if (sectionId === 'payment-section') {
+                footer.style.display = 'block'; // Show buttons when payment section is expanded
+            }
+        }
+    }
+</script>
+{% endblock %}

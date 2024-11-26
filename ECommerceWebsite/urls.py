@@ -9,6 +9,7 @@ urlpatterns = [
     path('sign-up/', views.sign_up, name='sign_up'),
     path('cat-tree/', views.cat_tree, name='cat_tree'),
     path('cart/', views.cart, name='cart'),
+    path('checkout/', views.checkout, name='checkout'),
     path('about/', views.about, name='about'),
     path('logout/', views.logout_view, name='logout'),
     path('homepage/', include('Dcatz.homepage_urls')),
