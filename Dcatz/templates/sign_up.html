@@ -34,23 +34,43 @@
             <div class="Form-container">
                 <form method="POST" action="{% url 'sign_up' %}">
                     {% csrf_token %}
-
-                    <!-- heading-->
-                    <div class="Sign_up_parent">
-                        <div id="Sign_up">Sign Up</div>
-                    </div>
-                    
-                    <!-- Name container -->
-                    <div class="First_Last_name_container">
-                        <div class="First_name">
-                            <input type="text" placeholder="First Name" name="first_name" value="{{ request.POST.first_name }}" required><br>
+                    <div class="Inside-form-container">
+                        <!-- heading-->
+                        <div class="Sign_up_parent">
+                            <div id="Sign_up">Sign Up</div>
                         </div>
-                        <div class="Last_name">
-                            <input type="text" placeholder="Last Name" name="last_name" value="{{ request.POST.last_name }}" required><br>
+                        
+                        <!-- Name container -->
+                        <div class="First_Last_name_container">
+                            <div class="First_name">
+                                <input type="text" placeholder="First Name" name="first_name" value="{{ request.POST.first_name }}" required><br>
+                            </div>
+                            <div class="Last_name">
+                                <input type="text" placeholder="Last Name" name="last_name" value="{{ request.POST.last_name }}" required><br>
+                            </div>
                         </div>
-                    </div>
+    
+                        <!-- adresss -->
+    
+                        <div class="Province-city-container">
+                            <div class="Province">
+                        <input type="text" placeholder="province" name="province" value="{{ request.POST.province }}" required><br>
+                            </div>
+                            <div class="City">
+                        <input type="text" placeholder="city" name="city" value="{{ request.POST.city }}" required><br>
+                            </div>
+                         </div>
+    
+                        <div class="Brgy-street-container">
+                            <div class="Brgy">
+                        <input type="text" placeholder="barangay" name="barangay" value="{{ request.POST.barangay }}" required><br>
+                            </div>
+                            <div class="Street">
+                        <input type="text" placeholder="street" name="street" value="{{ request.POST.street }}" required><br>
+                            </div>
+                        </div>
 
-                    <input type="text" placeholder="Address" name="address" value="{{ request.POST.address }}" required><br>
+                        
                     <input type="text" pattern="^\d{11}$" placeholder="Number (11 digits)" name="number" value="{{ request.POST.number }}" required><br>
                     <input type="text" placeholder="Username" name="username" value="{{ request.POST.username }}" required><br>
                     <input type="password" placeholder="Password" name="password" required><br>

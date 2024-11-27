@@ -105,20 +105,6 @@ h4 {
     margin-top: 20px;
 }
 
-/* First and last name */
-.First_Last_name_container {
-    display: flex;
-   
-    width: 100%;
-}
-
-.First_name, .Last_name {
-    width: 45%;
-}
-
-.First_name {
-    margin-left: 5%;
-}
 
 /* Sign up label */
 .Sign_up_parent {
@@ -134,15 +120,37 @@ h4 {
     margin-bottom: 3%;
 }
 
+.Inside-form-container{
+    width:80%;
+    margin-left: 10%;
+    height: 100%;
+
+}
+
+
+/* address and name*/
+    .Province-city-container, .Brgy-street-container, .First_Last_name_container{
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        gap:5px;
+        align-items: center;
+        
+    }
+ .City, .Province, .Brgy, .Street, .First_name, .Last_name {
+    width: 49%;
+    margin: 0;
+ }
+
 /* Input */
 input[type="text"], input[type="password"] {
-    width: 80%;
+    width: 100%;
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 8px;
-    height: 7vh;
+    height: 5.5vh;
     margin-top: 2%;
-    font-size: 3vh;
+    font-size: 2.5vh;
     padding: 0 10px;
     background-color: rgba(255,255, 255, 0.5);
 }
