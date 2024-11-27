@@ -47,7 +47,7 @@
         <section class="list">
             {% for x in all %}
                 <div class="product-item">
-                    <img src="{% static 'all-files/' %}{{ x.file_name }}" alt="Cat Accessories">
+                    <img src="{{ x.file_image.url }}" alt="{{ x.file_name }}">
                     <h3>{{ x.item_name }}</h3>
                     <p class="price">${{ x.price }}</p>
                     <a href="{% url 'homepage:cat_tree' %}?name={{ x.item_name }}&price={{ x.price }}&image={{ x.file_name }}" class="view-product">View Product</a>

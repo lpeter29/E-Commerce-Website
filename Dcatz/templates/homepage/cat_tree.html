@@ -52,6 +52,7 @@ Cat Tree
     <div class="product-main">
       <div class="product-image">
         <img src="{% static 'all-files/' %}{{ request.GET.image }}" alt="Product Image">
+        <div class="varieties"></div>
       </div>
       <div class="product-info">
         <h1>{{ request.GET.name }}</h1>
@@ -68,9 +69,7 @@ Cat Tree
         <p class="price">₱{{ request.GET.price }}</p>
         //This class needs to have an additional database to call it
         <div class="product-description">
-          <p><span>Description:</span>&ensp;This model produces photorealistic quality,<br>
-            as seen in our asset "CatHouse 02", which shows a fully textured<br>
-            object that is prepared for close-up and HD renders.</p>
+          <p><span>Description:</span>&ensp;{{ request.GET.description }}</p>
         </div>
 
         <div class="variety">

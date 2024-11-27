@@ -131,36 +131,36 @@ def about(request):
     return render(request, 'about.html')
 
 def accessories(request):
-    all = CatAccessories.objects.all().values()
+    all = AllFiles.objects.filter(category = 'Accessories')
     context = {
-        'all': all
+        'all': all,
     }
 
     return render(request, 'homepage/accessories.html', context)
 
 def clothing(request):
-    all = CatClothing.objects.all().values()
+    all = AllFiles.objects.filter(category = 'Clothes')
     context = {
         'all': all
     }
     return render(request, 'homepage/clothing.html', context)
 
 def furniture(request):
-    all = CatFurniture.objects.all().values()
+    all = AllFiles.objects.filter(category = 'Furniture')
     context = {
         'all': all
     }
     return render(request, 'homepage/furniture.html', context)
 
 def food(request):
-    all = CatFood.objects.all().values()
+    all = AllFiles.objects.filter(category = 'Food')
     context = {
         'all': all
     }
     return render(request, 'homepage/food.html', context)
 
 def toys(request):
-    all = CatToys.objects.all().values()
+    all = AllFiles.objects.filter(category = 'Toys')
     context = {
         'all': all
     }
@@ -212,6 +212,7 @@ def cat_tree(request):
         'price': request.GET.get('price'),
         'image': current_image
     }
+
     return render(request, 'homepage/cat_tree.html', context)
 
 @login_required

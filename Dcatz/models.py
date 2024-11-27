@@ -8,10 +8,22 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.user.username
 
+class categories:
+    category = (
+        ('Accessories', 'Accessories'),
+        ('Clothing', 'Clothing'),
+        ('Food', 'Food'),
+        ('Furniture', 'Furniture'),
+        ('Toys', 'Toys'),
+    )
+
 class AllFiles(models.Model):
     file_name = models.CharField(max_length=2054)
     item_name = models.CharField(max_length=2054)
     price = models.DecimalField(max_digits=10, decimal_places=2)
+    description = models.TextField(max_length=2054, null=True)
+    category = models.CharField(max_length=2054, choices=categories.category, null=True)
+    file_image = models.ImageField(upload_to='static/all-files', null=True)
     def __str__(self):
         return f"{self.item_name}, {self.file_name}"
 
@@ -19,6 +31,7 @@ class CatAccessories(models.Model):
     file_name = models.CharField(max_length=2054)
     item_name = models.CharField(max_length=2054)
     price = models.DecimalField(max_digits=10, decimal_places=2)
+    information = models.OneToOneField(AllFiles, on_delete=models.CASCADE, null=True)
     def __str__(self):
         return f"{self.item_name}, {self.file_name}"
 
@@ -70,3 +83,9 @@ class CartItems(models.Model):
     cart_price = models.DecimalField(max_digits=10, decimal_places=2)
     def __str__(self):
         return f"{self.cart_item_name}, {self.cart_file_name}"
+
+class varieties(models.Model):
+    variety_name = models.CharField(max_length=2054)
+    variety_description = models.TextField(null=True)
+    variety_image = models.ImageField(upload_to='static/varieties')
+    variety = models.ForeignKey(AllFiles, on_delete=models.CASCADE, null=True)
