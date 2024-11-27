@@ -19,6 +19,7 @@ Checkout
                     <span class="arrow">&#x25BC;</span> <!-- Down arrow icon initially -->
                 </div>
                 <div id="contact-section" class="checkout-content">
+                    <p class="amessage">Shipping address</p>
                     <form id="contact-form">
                         <div class="form-row">
                             <div class="form-group">
@@ -65,11 +66,14 @@ Checkout
                 </div>
                 <div id="payment-section" class="checkout-content">
                     <form id="payment-form">
+                        <p class="amessage">Choose your method of payment</p>
                         <div class="payment-method">
                             <label>
                                 <input type="radio" name="payment-method" value="credit-card" onclick="togglePaymentInputs('credit-card')" disabled>
                                 Credit or Debit Card
                             </label>
+                            <!-- Divider -->
+                            <div class="payment-divider" id="credit-card-divider" style="display: none;"></div>
                             <div id="credit-card-inputs" class="payment-inputs" style="display: none;">
                                 <div class="form-group">
                                     <label for="card-number">Card Number*</label>
@@ -93,6 +97,8 @@ Checkout
                                 <input type="radio" name="payment-method" value="gcash" onclick="togglePaymentInputs('gcash')" disabled>
                                 GCash
                             </label>
+                            <!-- Divider -->
+                            <div class="payment-divider" id="gcash-divider" style="display: none;"></div>
                             <div id="gcash-inputs" class="payment-inputs" style="display: none;">
                                 <div class="form-group">
                                     <label for="gcash-phone-number">Phone Number*</label>
@@ -106,6 +112,8 @@ Checkout
                                 <input type="radio" name="payment-method" value="cod" onclick="togglePaymentInputs('cod')" disabled>
                                 Cash on Delivery
                             </label>
+                            <!-- Divider -->
+                            <div class="payment-divider" id="cod-divider" style="display: none;"></div>
                             <div id="cod-inputs" class="payment-inputs" style="display: none;">
                                 <p>Pay when you receive the order.</p>
                             </div>    
@@ -182,7 +190,7 @@ Checkout
                             </tr>
                             <tr>
                                 <td colspan="2"><strong>Shipping</strong></td>
-                                <td style="text-align: right;"><strong style="color: red;">₱{{ shipping }}</strong></td>
+                                <td class="shipping-price" style="text-align: right;"><strong>₱{{ shipping }}</strong></td>
                             </tr>
                             <tr>
                                 <td colspan="3" class="divider"></td>
@@ -205,6 +213,48 @@ Checkout
 </div>
 
 <script>
+    function toggleContactPayment() {
+        const contactSection = document.getElementById('contact-section');
+        const paymentSection = document.getElementById('payment-section');
+        const paymentContainer = document.getElementById('payment-container');
+        const paymentHeader = document.getElementById('payment-header');
+        const contactHeader = document.querySelector('.checkout-header');
+        const paymentFooter = document.getElementById('payment-footer'); // Payment footer with buttons
+
+        // Toggle Contact Information and Payment Section
+        if (contactSection.style.display === "none") {
+            // Uncollapse Contact Information section
+            contactSection.style.display = "block";
+            paymentSection.style.display = "none"; // Collapse Payment section
+            paymentContainer.style.pointerEvents = "none"; // Disable Payment Section
+            paymentContainer.style.opacity = "0.5"; // Dim Payment Section
+
+            // Toggle the arrow direction for Contact Information (Up arrow when collapsed)
+            contactHeader.querySelector('.arrow').innerHTML = "&#x25B2;"; // Up arrow
+
+            // Toggle the arrow direction for Payment (Down arrow when collapsed)
+            paymentHeader.querySelector('.arrow').innerHTML = "&#x25BC;"; // Down arrow
+
+            // Hide Payment footer buttons (Cancel and Place Order)
+            paymentFooter.style.display = "none";
+        } else {
+            // Collapse Contact Information section
+            contactSection.style.display = "none";
+            paymentSection.style.display = "block"; // Uncollapse Payment Section
+            paymentContainer.style.pointerEvents = "auto"; // Enable Payment Section
+            paymentContainer.style.opacity = "1"; // Full opacity
+
+            // Toggle the arrow direction for Contact Information (Down arrow when expanded)
+            contactHeader.querySelector('.arrow').innerHTML = "&#x25BC;"; // Down arrow
+
+            // Toggle the arrow direction for Payment (Up arrow when expanded)
+            paymentHeader.querySelector('.arrow').innerHTML = "&#x25B2;"; // Up arrow
+
+            // Show Payment footer buttons (Cancel and Place Order)
+            paymentFooter.style.display = "block";
+        }
+    }
+
     function validateForm() {
         const requiredFields = [
             'first-name', 'last-name', 'street-address', 'city', 'region', 'zip-code', 'phone-number'
@@ -274,6 +324,7 @@ Checkout
                     continueButton.disabled = true;  // Disable Place Order button
                 }
                 enablePaymentSection();
+                toggleContactPayment();
                 } else {
                     // If not confirmed, you can either keep the form open or do nothing
                     console.log("Form submission canceled.");
@@ -304,25 +355,32 @@ Checkout
     // Add event listeners to enable inputs and show the payment method when selected
     function togglePaymentInputs(paymentMethod) {
         resetPaymentFields(); // Reset fields when switching
-
-        // Hide all payment input fields
+    
+        // Hide all payment input fields and dividers
         document.getElementById('credit-card-inputs').style.display = 'none';
         document.getElementById('gcash-inputs').style.display = 'none';
         document.getElementById('cod-inputs').style.display = 'none';
-
+        
+        document.getElementById('credit-card-divider').style.display = 'none';
+        document.getElementById('gcash-divider').style.display = 'none';
+        document.getElementById('cod-divider').style.display = 'none';
+    
         // Enable the appropriate inputs based on the payment method selected
         if (paymentMethod === 'credit-card') {
             document.getElementById('card-number').disabled = false;
             document.getElementById('expiry-date').disabled = false;
             document.getElementById('cvc').disabled = false;
             document.getElementById('credit-card-inputs').style.display = 'block'; // Show credit card inputs
+            document.getElementById('credit-card-divider').style.display = 'block'; // Show the divider for Credit Card
         } else if (paymentMethod === 'gcash') {
             document.getElementById('gcash-phone-number').disabled = false;
             document.getElementById('gcash-inputs').style.display = 'block'; // Show GCash inputs
+            document.getElementById('gcash-divider').style.display = 'block'; // Show the divider for GCash
         } else if (paymentMethod === 'cod') {
             document.getElementById('cod-inputs').style.display = 'block'; // Show COD text
+            document.getElementById('cod-divider').style.display = 'block'; // Show the divider for COD
         }
-    }
+    }    
 
     // Reset all payment fields to hide input fields and error styling
     function resetPaymentFields() {
@@ -457,7 +515,7 @@ Checkout
 
         // If savings is not 0.00, make the savings text green and show a minus sign
         if (savings > 0) {
-            savingsDisplay.style.color = "green";
+            savingsDisplay.style.color = "darkgreen";
             savingsDisplay.textContent = `-₱${savings.toFixed(2)}`;
         } else {
             savingsDisplay.style.color = "black"; // Reset to default color if no savings

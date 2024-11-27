@@ -1,7 +1,12 @@
 body {
     background: linear-gradient(180deg, rgba(22, 50, 91, 1) 0%, rgba(255, 220, 127, 1) 100%);
     font-family: Arial, sans-serif;
-    color: #333;
+    color: white;
+}
+
+.amessage{
+    margin-left: 5px;
+    margin-bottom: 20px;
 }
 
 .page-container {
@@ -29,7 +34,8 @@ body {
     margin: 20px auto;
     padding: 20px;
     max-width: 1200px; /* Max width of container */
-    background: #fff;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     width: 100%;
@@ -42,7 +48,8 @@ body {
     align-items: center;
     cursor: pointer;
     padding: 10px;
-    background: #f4f4f4;
+    font-weight: 600;
+    background-color: rgba(0, 0, 0, 0.2);
     border-radius: 8px;
     width: 100%;
 }
@@ -70,6 +77,7 @@ body {
 }
 
 label {
+    color: white;
     font-weight: bold;
     margin-bottom: 8px;
     display: block;
@@ -82,12 +90,13 @@ input[type="text"], input[type="tel"], input[type="date"], input[type="email"], 
     border-radius: 4px;
     font-size: 14px;
     box-sizing: border-box;
+    background-color: rgba(255,255, 255, 0.5);
 
 }
 
 /* Optional: Styling for the placeholder text to match design */
 input::placeholder {
-    color: #888;  /* Lighter color for placeholders */
+    color: #252424;  /* Lighter color for placeholders */
 }
 
 /* Border for payment options containers */
@@ -96,6 +105,7 @@ input::placeholder {
     padding: 8px; /* Further reduce padding to make the container smaller */
     margin-bottom: 8px; /* Reduce margin between containers */
     border-radius: 8px; /* Optional: Rounded corners for aesthetic */
+    font-size: 14px;
 }
 
 /* Remove border from inner labels and input fields */
@@ -103,18 +113,23 @@ input::placeholder {
     border: none; /* Remove border from labels and input fields */
     padding: 4px; /* Further reduce padding to fit the new size */
     width: 100%;
+    margin-left: 5px;
 }
 
 .payment-method .form-group input {
     border: 1px solid black; /* Keep border for input fields */
-    padding: 4px; /* Further reduce padding for a more compact look */
+    padding: 8px; /* Further reduce padding for a more compact look */
     width: 100%;
 }
 
 .payment-method .payment-inputs {
-    padding: 6px; /* Reduce padding to make it smaller */
-    background-color: #f9f9f9; /* Optional: Slight background for input sections */
-    border-radius: 8px;
+    padding: 4px; /* Reduce padding to make it smaller */
+}
+
+.payment-divider {
+    border: none;
+    border-top: 2px solid black;
+    margin: 10px 0; /* Adjust margin to control spacing */
 }
 
 .order-summary-table {
@@ -134,10 +149,12 @@ input::placeholder {
 }
 
 .product-name {
+    color: white;
     padding-left: 10px;
 }
 
 .product-quantity, .product-price {
+    color: white;
     text-align: center;
 }
 
@@ -146,13 +163,13 @@ input::placeholder {
 }
 
 .shipping-price {
-    color: red;
+    color: rgb(182, 0, 0);
 }
 
 /* Styling for scaled-down border */
 .order-summary-table .divider {
     height: 1px;
-    background-color: black; /* Line color */
+    background-color: white; /* Line color */
     transform: scaleY(0.1); /* Shrinks the thickness */
     transform-origin: center; /* Keeps it centered */
     margin: 8px 0; /* Add spacing */
@@ -285,6 +302,7 @@ input::placeholder {
     border-radius: 4px;
     font-size: 14px;
     box-sizing: border-box;
+    background-color: rgba(255,255, 255, 0.5);
 }
 
 .apply-btn {
