@@ -13,7 +13,10 @@ def sign_up(request):
         password = request.POST['password']
         first_name = request.POST['first_name']
         last_name = request.POST['last_name']
-        address = request.POST['address']
+        province = request.POST['province']
+        city = request.POST['city']
+        barangay = request.POST['barangay']
+        street = request.POST['street']
         number = request.POST['number']
 
         # Check if username already exists
@@ -28,7 +31,19 @@ def sign_up(request):
             first_name=first_name,
             last_name=last_name
         )
-        UserProfile.objects.create(user=user, address=address, number=number)
+        
+        # Create the full address string
+        full_address = f"{street}, {barangay}, {city}, {province}"
+        
+        UserProfile.objects.create(
+            user=user,
+            province=province,
+            city=city,
+            barangay=barangay,
+            street=street,
+            address=full_address,
+            number=number
+        )
 
         messages.success(request, 'Account created successfully! You can now log in.')
         return redirect('sign_in')
