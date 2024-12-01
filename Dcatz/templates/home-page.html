@@ -9,98 +9,100 @@ Home Page
 {% endblock %}
 
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/subtopic.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
-<section class="sub-picks-section">
-    <div class="sub-picks">
-        <ul class="sub-picks-list">
-            <li><a href="{% url 'homepage:accessories' %}" class="li-decor">Accessories</a></li>
-            <li><a href="{% url 'homepage:clothing' %}" class="li-decor">Clothing</a></li>
-            <li><a href="{% url 'homepage:furniture' %}" class="li-decor">Furniture</a></li>
-            <li><a href="{% url 'homepage:food' %}" class="li-decor">Food</a></li>
-            <li><a href="{% url 'homepage:toys' %}" class="li-decor">Toys</a></li>       
-        </ul>        
-        <span id="sub-picks-span">
+    <link rel="stylesheet" href="{% static 'css/subtopic.css' %}">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <section class="sub-picks-section">
+        <div class="sub-picks">
             <ul class="sub-picks-list">
-                <li><a href="{% url 'homepage:promo' %}" class="li-decor">Promo</a></li>
-                <li><a href="{% url 'homepage:free-shipping' %}" class="li-decor">Free Shipping</a></li>
-                <li><a href="{% url 'homepage:discounts' %}" class="li-decor">10% Off Deals</a></li>
+                <li><a href="{% url 'homepage:accessories' %}" class="li-decor">Accessories</a></li>
+                <li><a href="{% url 'homepage:clothing' %}" class="li-decor">Clothing</a></li>
+                <li><a href="{% url 'homepage:furniture' %}" class="li-decor">Furniture</a></li>
+                <li><a href="{% url 'homepage:food' %}" class="li-decor">Food</a></li>
+                <li><a href="{% url 'homepage:toys' %}" class="li-decor">Toys</a></li>       
             </ul>        
-        </span>
-        <span>
-            <ul class="search-ul">
-                <li>
-                    <div class="search-div">
-                        <input type="text" name="search" id="search" class="search-bar">
-                        <button class="search-button">Search</button>
-                    </div>
-                </li>
-            </ul>
-        </span>
-    </div>
-</section>
-
-<!-- <section class="main-banner-section"> -->
-    <div class="main-banner">
-        <h1>Sale!</h1>
-        <p>10% OFF</p>
-        <img class="banner" src="{% static 'banner.png' %}">
-    </div>
-
-    <div class="bottom-dots">
-        <ul class="bottom-dots-ul">
-            <li id="bottom-dots-li"></li>
-            <li id="bottom-dots-li"></li>
-            <li id="bottom-dots-li"></li>
-            <li id="bottom-dots-li"></li>
-        </ul>
-    </div>
-<!-- </section> -->
-
-<!-- <section class="top-products-section"> -->
-    <div class="top-products-div">
-        <h2>Top Products</h2>
-        <div class="top-products-selection">
-            <!-- for 5 items in models -->
-            <span class="circle-button-left">
-                <div class="circle-div circle-button"><</div>
+            <span id="sub-picks-span">
+                <ul class="sub-picks-list">
+                    <li><a href="{% url 'homepage:promo' %}" class="li-decor">Promo</a></li>
+                    <li><a href="{% url 'homepage:free-shipping' %}" class="li-decor">Free Shipping</a></li>
+                    <li><a href="{% url 'homepage:discounts' %}" class="li-decor">10% Off Deals</a></li>
+                </ul>        
             </span>
-            <div class="product-info">
-                <div class="product-picture">
-
-                </div>
-            </div>
-            <div class="product-info">
-                <div class="product-picture">
-                    
-                </div>
-            </div>
-            <div class="product-info">
-                <div class="product-picture">
-                    
-                </div>
-            </div>
-            <div class="product-info">
-                <div class="product-picture">
-                    
-                </div>
-            </div>
-            <div class="product-info">
-                <div class="product-picture">
-                    
-                </div>
-            </div>
-            <div class="product-info">
-                <div class="product-picture">
-                    
-                </div>
-            </div>
-            <span class="circle-button-right">
-                <div class="circle-div circle-button">></div>
+            <span>
+                <ul class="search-ul">
+                    <li>
+                        <div class="search-div">
+                            <input type="text" placeholder="Search" name="search" id="search" class="search-bar">
+                            <button class="search-button">
+                                <i class='bx bx-search'></i>
+                            </button>
+                        </div>
+                    </li>
+                </ul>
             </span>
-            <!-- endfor -->
         </div>
-    </div>
-<!-- </section> --> 
+    </section>
+
+    <!-- <section class="main-banner-section"> -->
+        <div class="main-banner">
+            <h1>Sale!</h1>
+            <p>10% OFF</p>
+            <img class="banner" src="{% static 'banner.png' %}">
+        </div>
+
+        <div class="bottom-dots">
+            <ul class="bottom-dots-ul">
+                <li id="bottom-dots-li"></li>
+                <li id="bottom-dots-li"></li>
+                <li id="bottom-dots-li"></li>
+                <li id="bottom-dots-li"></li>
+            </ul>
+        </div>
+    <!-- </section> -->
+
+    <!-- <section class="top-products-section"> -->
+        <div class="top-products-div">
+            <h2>Top Products</h2>
+            <div class="top-products-selection">
+                <!-- for 5 items in models -->
+                <span class="circle-button-left">
+                    <div class="circle-div circle-button"><</div>
+                </span>
+                <div class="product-info">
+                    <div class="product-picture">
+
+                    </div>
+                </div>
+                <div class="product-info">
+                    <div class="product-picture">
+                        
+                    </div>
+                </div>
+                <div class="product-info">
+                    <div class="product-picture">
+                        
+                    </div>
+                </div>
+                <div class="product-info">
+                    <div class="product-picture">
+                        
+                    </div>
+                </div>
+                <div class="product-info">
+                    <div class="product-picture">
+                        
+                    </div>
+                </div>
+                <div class="product-info">
+                    <div class="product-picture">
+                        
+                    </div>
+                </div>
+                <span class="circle-button-right">
+                    <div class="circle-div circle-button">></div>
+                </span>
+                <!-- endfor -->
+            </div>
+        </div>
+    <!-- </section> --> 
 
 {% endblock %}
