@@ -18,7 +18,6 @@ div.sub-picks, ul.sub-picks-list, ul.search-ul, ul.bottom-dots-ul {
     /* letter-spacing: 0.5px; */
     > span#sub-picks-span {
         border-left: 2px solid white;
-        margin-left: 20px;
     }
 }
 
@@ -37,7 +36,7 @@ div.search-div input {
     background: rgba(255, 255, 255, 0.1);
     padding: 8px 40px 8px 15px;
     color: white;
-    text-align: right;
+    text-align: left;
 }
 
 div.search-div input::placeholder {

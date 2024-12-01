@@ -50,7 +50,7 @@
                     <img src="{% static 'all-files/' %}{{ x.file_name }}" alt="Cat Clothing">
                     <h3>{{ x.item_name }}</h3>
                     <p class="price">${{ x.price }}</p>
-                    <a href="{% url 'homepage:cat_tree' %}?name={{ x.item_name }}&price={{ x.price }}&image={{ x.file_name }}" class="view-product">View Product</a>
+                    <a href="{% url 'homepage:cat_tree' x.id %}" class="view-product">View Product</a>
                 </div>
             {% endfor %}
         </section>

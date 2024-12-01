@@ -51,11 +51,11 @@ Cat Tree
   <div class="container2">
     <div class="product-main">
       <div class="product-image">
-        <img src="{% static 'all-files/' %}{{ request.GET.image }}" alt="Product Image">
+        <img src="{{ product.file_image.url }}" alt="{{ product.item_name }}">
         <div class="varieties"></div>
       </div>
       <div class="product-info">
-        <h1>{{ request.GET.name }}</h1>
+        <h1>{{ product.item_name }}</h1>
         
         <div class="rating-container">
           <span class="star" data-value="1">&#9733;</span>
@@ -66,10 +66,9 @@ Cat Tree
           <div class="rating-value">0</div>
         </div>
 
-        <p class="price">₱{{ request.GET.price }}</p>
-        //This class needs to have an additional database to call it
+        <p class="price">₱{{ product.price }}</p>
         <div class="product-description">
-          <p><span>Description:</span>&ensp;{{ request.GET.description }}</p>
+          <p><span>Description:</span>&ensp;{{ product.description }}</p>
         </div>
 
         <div class="variety">
@@ -93,19 +92,6 @@ Cat Tree
       </div>
     </div>
 
-    <div class="similar-products">
-        <h2>Similar Products</h2>
-        <div class="similar-products-grid">
-            {% for item in similar_items %}
-                <div class="similar-item">
-                    <img src="{% static 'all-files/' %}{{ item.file_name }}" alt="Similar product">
-                    <h3>{{ item.item_name }}</h3>
-                    <p class="price">${{ item.price }}</p>
-                    <a href="{% url 'homepage:cat_tree' %}?name={{ item.item_name }}&price={{ item.price }}&image={{ item.file_name }}" class="view-product">View Product</a>
-                </div>
-            {% endfor %}
-        </div>
-    </div>
   </div>
 
 <script>
@@ -154,22 +140,27 @@ function decreaseQuantity() {
 
 function addToCart() {
     const quantity = document.getElementById('quantity').value;
-    
-    fetch('{% url "homepage:add_to_cart" %}', {
+    const productId = window.location.pathname.split('/').pop();  // Get the product ID from the URL
+
+    fetch('/homepage/add-to-cart/${productId}/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
-            'X-CSRFToken': getCookie('csrftoken')
+            'X-CSRFToken': getCookie('csrftoken')  // CSRF token for protection
         },
-        body: `item_name={{ request.GET.name }}&file_name={{ request.GET.image }}&price={{ request.GET.price }}&quantity=${quantity}`
+        body: `product_id=${productId}&quantity=${quantity}`  // Send product_id and quantity to the server
     })
     .then(response => response.json())
     .then(data => {
         if (data.status === 'success') {
             alert('Item added to cart successfully!');
+        } else {
+            alert('There was an error adding the item to your cart.');
         }
     });
 }
+
+
 
 function getCookie(name) {
     let cookieValue = null;

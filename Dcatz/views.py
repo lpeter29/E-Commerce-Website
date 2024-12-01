@@ -26,7 +26,7 @@ def sign_up(request):
             username=username,
             password=password,
             first_name=first_name,
-            last_name=last_name
+            last_name=last_name,
         )
         UserProfile.objects.create(user=user, address=address, number=number)
 
@@ -80,32 +80,61 @@ def cart(request):
 @login_required
 def add_to_cart(request):
     if request.method == 'POST':
-        item_name = request.POST.get('item_name')
-        file_name = request.POST.get('file_name')
-        price = request.POST.get('price')
+        product_id = request.POST.get('product_id')
         quantity = int(request.POST.get('quantity', 1))
         
-        # Check if item already exists in cart
-        cart_item = CartItem.objects.filter(user=request.user, item_name=item_name).first()
+        try:
+            # Retrieve the product using the provided product_id
+            product = AllFiles.objects.get(id=product_id)
+        except AllFiles.DoesNotExist:
+            return JsonResponse({'status': 'error', 'message': 'Product not found.'})
+        
+        # Check if item already exists in the cart
+        cart_item = CartItem.objects.filter(user=request.user, product=product).first()
         
         if cart_item:
-            # Update quantity if item exists
+            # Update the quantity if item exists in the cart
             cart_item.quantity += quantity
             cart_item.save()
         else:
-            # Create new cart item
+            # Create a new cart item if it doesn't exist in the cart
             CartItem.objects.create(
                 user=request.user,
-                item_name=item_name,
-                file_name=file_name,
-                price=price,
+                product=product,
                 quantity=quantity
             )
         
-        messages.success(request, 'Item added to cart successfully!')
         return JsonResponse({'status': 'success'})
     
     return JsonResponse({'status': 'error'})
+# def add_to_cart(request):
+#     if request.method == 'POST':
+#         item_name = request.POST.get('item_name')
+#         file_name = request.POST.get('file_name')
+#         price = request.POST.get('price')
+#         quantity = int(request.POST.get('quantity', 1))
+        
+#         # Check if item already exists in cart
+#         cart_item = CartItem.objects.filter(user=request.user, item_name=item_name).first()
+        
+#         if cart_item:
+#             # Update quantity if item exists
+#             cart_item.quantity += quantity
+#             cart_item.save()
+#         else:
+#             # Create new cart item
+#             CartItem.objects.create(
+#                 user=request.user,
+#                 item_name=item_name,
+#                 file_name=file_name,
+#                 price=price,
+#                 quantity=quantity
+#             )
+        
+#         messages.success(request, 'Item added to cart successfully!')
+#         return JsonResponse({'status': 'success'})
+    
+#     return JsonResponse({'status': 'error'})
 
 @login_required
 def remove_from_cart(request, item_id):
@@ -175,45 +204,74 @@ def free_shipping(request):
 def discounts(request):
     return render(request, 'homepage/discounts.html')
 
-def cat_tree(request):
-    current_item_name = request.GET.get('name')
-    current_image = request.GET.get('image', '')
-    
-    # Get category prefix and model from image name
-    category_prefix = ''
-    category_model = None
-    if current_image.startswith('furni'):
-        category_prefix = 'furni'
-        category_model = CatFurniture
-    elif current_image.startswith('toy'):
-        category_prefix = 'toy'
-        category_model = CatToys
-    elif current_image.startswith('food'):
-        category_prefix = 'food'
-        category_model = CatFood
-    elif current_image.startswith('cloth'):
-        category_prefix = 'cloth'
-        category_model = CatClothing
-    elif current_image.startswith('acc'):
-        category_prefix = 'acc'
-        category_model = CatAccessories
-    
-    # Get all items from the same category except the current item
-    if category_model:
-        similar_items = category_model.objects.exclude(
-            item_name=current_item_name
-        ).order_by('?')[:4]  # Random order, limit to 4 items
-    else:
-        similar_items = []
-    
+def cat_tree(request, product_id):
+    # Fetch the current product based on product_id
+    current_product = get_object_or_404(AllFiles, id=product_id)
+
+    # Map category names to models
+    category_models = {
+        'furniture': CatFurniture,
+        'toys': CatToys,
+        'food': CatFood,
+        'clothing': CatClothing,
+        'accessories': CatAccessories,
+    }
+
+    # Get the appropriate model for the current category
+    category_model = category_models.get(current_product.category.lower())
+
+    # Fetch similar items from the same category excluding the current product
+    similar_items = (
+        category_model.objects.exclude(id=product_id).order_by('?')[:4]
+        if category_model
+        else []
+    )
+
     context = {
+        'product': current_product,
         'similar_items': similar_items,
-        'name': current_item_name,
-        'price': request.GET.get('price'),
-        'image': current_image
     }
 
     return render(request, 'homepage/cat_tree.html', context)
+
+    # current_item_name = request.GET.get('name')
+    # current_image = request.GET.get('image', '')
+    
+    # # Get category prefix and model from image name
+    # category_prefix = ''
+    # category_model = None
+    # if current_image.startswith('furni'):
+    #     category_prefix = 'furni'
+    #     category_model = CatFurniture
+    # elif current_image.startswith('toy'):
+    #     category_prefix = 'toy'
+    #     category_model = CatToys
+    # elif current_image.startswith('food'):
+    #     category_prefix = 'food'
+    #     category_model = CatFood
+    # elif current_image.startswith('cloth'):
+    #     category_prefix = 'cloth'
+    #     category_model = CatClothing
+    # elif current_image.startswith('acc'):
+    #     category_prefix = 'acc'
+    #     category_model = CatAccessories
+    
+    # # Get all items from the same category except the current item
+    # if category_model:
+    #     similar_items = category_model.objects.exclude(
+    #         item_name=current_item_name
+    #     ).order_by('?')[:4]  # Random order, limit to 4 items
+    # else:
+    #     similar_items = []
+    
+    # context = {
+    #     'similar_items': similar_items,
+    #     'name': current_item_name,
+    #     'price': request.GET.get('price'),
+    #     'image': current_image
+    # }
+
+    # return render(request, 'homepage/cat_tree.html', context)
 
 @login_required
 def checkout(request):

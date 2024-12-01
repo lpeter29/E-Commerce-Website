@@ -12,8 +12,8 @@ urlpatterns = [
     path('promo/', views.promo, name='promo'),
     path('free-shipping/', views.free_shipping, name='free-shipping'),
     path('discounts/', views.discounts, name='discounts'),
-    path('cat-tree/', views.cat_tree, name='cat_tree'),
-    path('add-to-cart/', views.add_to_cart, name='add_to_cart'),
+    path('cat_tree/<int:product_id>/', views.cat_tree, name='cat_tree'),
+    path('add-to-cart/<int:product_id>', views.add_to_cart, name='add_to_cart'),
     path('remove-from-cart/<int:item_id>/', views.remove_from_cart, name='remove_from_cart'),
     path('update-cart-quantity/<int:item_id>/', views.update_cart_quantity, name='update_cart_quantity'),
 ]
