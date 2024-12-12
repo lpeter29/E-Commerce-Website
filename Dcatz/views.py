@@ -78,8 +78,10 @@ def master(request):
     return HttpResponse(template.render())
     
 def home_page(request):
-    
     return render(request, 'home-page.html')
+
+def contacts(request):
+    return render(request, 'contacts.html')
 
 @login_required
 def cart(request):

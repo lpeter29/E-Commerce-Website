@@ -11,5 +11,6 @@ urlpatterns = [
     path('cat-tree/', views.cat_tree, name='cat_tree'),  
     path('cart/', views.cart, name='cart'),  
     path('about/', views.about, name='about'),  
+    path('contacts/', views.contacts, name='contacts'),  
     path('logout/', views.logout_view, name='logout'),
 ]
