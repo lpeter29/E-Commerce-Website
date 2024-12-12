@@ -6,6 +6,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .models import AllFiles, UserProfile, CatAccessories, CatClothing, CatFurniture, CatFood, CatToys, CartItem
 from decimal import Decimal
+from itertools import chain
+import random
 
 def sign_up(request):
     if request.method == 'POST':
@@ -78,7 +80,34 @@ def master(request):
     return HttpResponse(template.render())
     
 def home_page(request):
-    return render(request, 'home-page.html')
+    q1 = CatAccessories.objects.all()
+    q2 = CatClothing.objects.all()
+    q3 = CatFood.objects.all()
+    q4 = CatFurniture.objects.all()
+    q5 = CatToys.objects.all()
+
+    q1_l = list(q1)
+    q2_l = list(q2)
+    q3_l = list(q3)
+    q4_l = list(q4)
+    q5_l = list(q5)
+
+    random_q1 = random.sample(q1_l, min(5, len(q1_l)))
+    random_q2 = random.sample(q2_l, min(5, len(q2_l)))
+    random_q3 = random.sample(q3_l, min(5, len(q3_l)))
+    random_q4 = random.sample(q4_l, min(5, len(q4_l)))
+    random_q5 = random.sample(q5_l, min(5, len(q5_l)))
+    print(random_q4)
+
+    # all = list(chain(q1, q2, q3, q4, q5))
+    context = {
+        'r_q1': random_q1,
+        'r_q2': random_q2,
+        'r_q3': random_q3,
+        'r_q4': random_q4,
+        'r_q5': random_q5,
+    }
+    return render(request, 'home-page.html', context)
 
 def contacts(request):
     if request.method == 'POST':

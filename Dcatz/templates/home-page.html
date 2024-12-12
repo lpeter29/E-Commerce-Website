@@ -61,21 +61,64 @@ Home Page
 
     <!-- <section class="top-products-section"> -->
         <section class="accessories-list">
-            <div class="product-item">
-                <img src="acce7.png" >
+            <!-- <div class="product-item">
+                <img src="{% static '/all-files/acce7.png' %}" >
                 <h3>pic1</h3>
                 <p class="price"></p>
                 <button class="add-to-cart">Add to Cart</button>
-            </div>
-    
+            </div> -->
+            {% for x in r_q1 %}
             <div class="product-item">
-                <img src="acce2.png">
-                <h3>pic2</h3>
-                <p class="price">$60.00</p>
-                <button class="add-to-cart">Add to Cart</button>
+                <img src="{% static 'homepage/Accessories/' %}{{ x.file_name }}">
+                <h3>{{ x.item_name }}</h3>
+                <p class="price">₱{{ x.price }}</p>
+                <a href="{% url 'homepage:cat_tree' %}?name={{ x.item_name }}&price={{ x.price }}&image={{ x.file_name }}">
+                    <button class="add-to-cart">Add to Cart</button>
+                </a>
             </div>
-    
+            {% endfor %}
+            {% for x in r_q2 %}
             <div class="product-item">
+                <img src="{% static 'homepage/Clothing/' %}{{ x.file_name }}">
+                <h3>{{ x.item_name }}</h3>
+                <p class="price">₱{{ x.price }}</p>
+                <a href="{% url 'homepage:cat_tree' %}?name={{ x.item_name }}&price={{ x.price }}&image={{ x.file_name }}">
+                    <button class="add-to-cart">Add to Cart</button>
+                </a>
+            </div>
+            {% endfor %}
+            {% for x in r_q3 %}
+            <div class="product-item">
+                <img src="{% static 'homepage/Food/' %}{{ x.file_name }}">
+                <h3>{{ x.item_name }}</h3>
+                <p class="price">₱{{ x.price }}</p>
+                <a href="{% url 'homepage:cat_tree' %}?name={{ x.item_name }}&price={{ x.price }}&image={{ x.file_name }}">
+                    <button class="add-to-cart">Add to Cart</button>
+                </a>
+            </div>
+            {% endfor %}
+            {% for x in r_q4 %}
+            <div class="product-item">
+                <img src="{% static 'homepage/Furniture/' %}{{ x.file_name }}">
+                <h3>{{ x.item_name }}</h3>
+                <p class="price">₱{{ x.price }}</p>
+                <a href="{% url 'homepage:cat_tree' %}?name={{ x.item_name }}&price={{ x.price }}&image={{ x.file_name }}">
+                    <button class="add-to-cart">Add to Cart</button>
+                </a>
+            </div>
+            {% endfor %}
+            {% for x in r_q5 %}
+            <div class="product-item">
+                <img src="{% static 'homepage/Toys/' %}{{ x.file_name }}">
+                <h3>{{ x.item_name }}</h3>
+                <p class="price">₱{{ x.price }}</p>
+                <a href="{% url 'homepage:cat_tree' %}?name={{ x.item_name }}&price={{ x.price }}&image={{ x.file_name }}">
+                    <button class="add-to-cart">Add to Cart</button>
+                </a>
+            </div>
+            {% endfor %}
+    
+            <!-- <div class="product-item">
                 <img src="acce8.png" >
                 <h3>pic3</h3>
                 <p class="price">$60.00</p>
@@ -184,8 +227,8 @@ Home Page
                 <h3>pic20</h3>
                 <p class="price"></p>
                 <button class="add-to-cart">Add to Cart</button>
-            </div>
-            </div>
+            </div> -->
+
     
     
         </section>
@@ -206,6 +249,7 @@ Home Page
     text-align: center;
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    height: 100%;
 }
 .product-item button{
     background: linear-gradient(45deg, #227B94, #16325b);
@@ -213,7 +257,7 @@ Home Page
 
 .product-item img {
     width: 100%;
-    height: auto;
+    height: 220px;
     border-radius: 8px;
 }
 
