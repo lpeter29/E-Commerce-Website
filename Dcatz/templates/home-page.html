@@ -42,21 +42,115 @@ Home Page
         </div>
     </section>
 
-    <!-- <section class="main-banner-section"> -->
-        <div class="main-banner">
-            <h1>Sale!</h1>
-            <p>10% OFF</p>
-            <img class="banner" src="{% static 'banner.png' %}">
+    <div class="main-banner">
+        <h1>Sale!</h1>
+        <p>10% OFF</p>
+        <div class="banner-images">
+            <img class="banner" src="{% static 'banner3.png' %}">
+            <img class="banner" src="{% static 'banner2.jpg' %}">
+            <img class="banner" src="{% static 'banner1.jpg' %}">
         </div>
+    </div>
+    
+    <div class="bottom-dots">
+        <ul class="bottom-dots-ul">
+            <li class="dot" data-index="0"></li>
+            <li class="dot" data-index="1"></li>
+            <li class="dot" data-index="2"></li>
+        </ul>
+    </div>
+    
+<style>
+/* Container for the images */
+.main-banner {
+    position: relative;
+    width: 100%;
+    height: auto;
+    overflow: hidden; /* Hides the overflow images */
+}
 
-        <div class="bottom-dots">
-            <ul class="bottom-dots-ul">
-                <li id="bottom-dots-li"></li>
-                <li id="bottom-dots-li"></li>
-                <li id="bottom-dots-li"></li>
-                <li id="bottom-dots-li"></li>
-            </ul>
-        </div>
+.banner-images {
+    display: flex;
+    width: 300%; /* Adjust based on the number of images */
+    transition: transform 0.5s ease-in-out; /* Smooth transition */
+    height: 200px;
+}
+
+.banner {
+    width: 100%;
+    height: auto;
+    opacity: 1;
+    display: none; /* Hide all images by default */
+}
+
+.banner.active {
+    display: block; /* Only the active image is displayed */
+}
+
+.bottom-dots {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.bottom-dots-ul {
+    display: inline-block;
+    padding: 0;
+    list-style: none;
+}
+
+.bottom-dots-ul li {
+    display: inline-block;
+    background-color: #ccc;
+    width: 10px;
+    height: 10px;
+    margin: 5px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.bottom-dots-ul li.active {
+    background-color: #333;
+}
+
+
+</style>    
+<script>
+const dots = document.querySelectorAll('.bottom-dots-ul li');
+const images = document.querySelectorAll('.banner');
+let currentIndex = 0;
+
+// Function to update the images and dots
+function updateSlider(index) {
+    images.forEach((image, idx) => {
+        if (idx === index) {
+            image.classList.add('active');
+        } else {
+            image.classList.remove('active');
+        }
+    });
+
+    dots.forEach((dot, idx) => {
+        if (idx === index) {
+            dot.classList.add('active');
+        } else {
+            dot.classList.remove('active');
+        }
+    });
+}
+
+// Initialize the first image and dot as active
+updateSlider(currentIndex);
+
+// Add event listeners for each dot
+dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+        const index = parseInt(dot.getAttribute('data-index'));
+        updateSlider(index);
+    });
+});
+
+
+</script>    
     <!-- </section> -->
 
     <!-- <section class="top-products-section"> -->
@@ -287,10 +381,10 @@ Home Page
     background-color: #2980b9;
 }
 .main-banner h1{
-    margin-top: 5vh;
+    margin-top: 9vh;
 }
 .main-banner p{
-    margin-top: 3vh;
+    margin-top: -5vh;
 }
         </style>
     <!-- </section> --> 
