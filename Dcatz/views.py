@@ -81,6 +81,17 @@ def home_page(request):
     return render(request, 'home-page.html')
 
 def contacts(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        message = request.POST.get('message')
+        
+        # Here you can add code to handle the form submission
+        # For example, sending an email or saving to database
+        
+        messages.success(request, 'Thank you for your message! We will get back to you soon.')
+        return redirect('contacts')
+    
     return render(request, 'contacts.html')
 
 @login_required

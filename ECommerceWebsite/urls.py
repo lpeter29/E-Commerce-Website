@@ -11,6 +11,7 @@ urlpatterns = [
     path('cart/', views.cart, name='cart'),
     path('checkout/', views.checkout, name='checkout'),
     path('about/', views.about, name='about'),
+    path('contacts/', views.contacts, name='contacts'),
     path('logout/', views.logout_view, name='logout'),
     path('homepage/', include('Dcatz.homepage_urls')),
     path('admin/', admin.site.urls),
