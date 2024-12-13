@@ -1,0 +1,113 @@
+.category-banner-1{
+    background-image: url('/static/1.png');
+    background-size: cover; 
+    background-position: center;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    text-shadow: 0 2px 4px rgba(255, 255, 255, 1);
+}
+
+.category-banner-1 h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.category-banner-1 p {
+    font-size: 1.2em;
+}
+.category-banner-2{
+    background-image: url('/static/2.png');
+    background-size: cover; 
+    background-position: center;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    text-shadow: 0 2px 4px rgba(255, 255, 255, 1);
+}
+
+.category-banner-2 h1 {
+    color: black;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.category-banner-2 p {
+    color: black;
+    font-size: 1.2em;
+}
+.category-banner-3{
+    background-image: url('/static/3.png');
+    background-size: cover; 
+    background-position: center;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    text-shadow: 0 2px 4px rgba(255, 255, 255, 1);
+}
+
+.category-banner-3 h1 {
+    color: black;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.category-banner-3 p {
+    color: black;
+    font-size: 1.2em;
+}
+.category-banner-4{
+    background-image: url('/static/4.png');
+    background-size: cover; 
+    background-position: center;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    text-shadow: 0 2px 4px rgba(255, 255, 255, 1);
+}
+
+.category-banner-4 h1 {
+    color: black;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.category-banner-4 p {
+    color: black;
+    font-size: 1.2em;
+}
+.category-banner-5{
+    background-image: url('/static/5.png');
+    background-size: cover; 
+    background-position: center;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    text-shadow: 0 2px 4px rgba(255, 255, 255, 1);
+}
+
+.category-banner-5 h1 {
+    color: black;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.category-banner-5 p {
+    color: black;
+    font-size: 1.2em;
+}
