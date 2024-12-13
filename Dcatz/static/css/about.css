@@ -18,18 +18,68 @@ body {
     max-width: 800px;
     margin: 50px auto;
     padding: 20px;
-    background: rgba(255, 255, 255, 0.8);
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     color: #333;
     line-height: 1.6;
+    transform: translateY(50px);
+    animation: slide-in 1.2s ease-out;
+    position: relative;
+    overflow: hidden;
+}
+
+.about-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 300%;
+    height: 100%;
+    background: linear-gradient(120deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));
+    transform: skewX(-20deg);
+    animation: shimmer 2.5s infinite;
 }
 
 .about-container h1 {
     text-align: center;
     color: #16325B;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    animation: fade-in 1s ease-in-out;
 }
 
 .about-container p {
     margin-bottom: 20px;
+    animation: fade-in 1.5s ease-in-out;
+}
+
+/* Animations */
+@keyframes slide-in {
+    0% {
+        transform: translateY(100px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
