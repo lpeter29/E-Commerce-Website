@@ -1,7 +1,7 @@
 /* <---------------------------------- CSS FOR home-page.html ----------------------------------> */
 
 div.main-banner {
-    position: relative;
+    position: center;
     border: 0px solid white;
     margin: 0 auto;
     margin-top: 20px;
@@ -14,8 +14,8 @@ div.main-banner {
     > h1 {
         position: absolute;
         color: white;
-        left: 20%;
-        top: -10%;
+        left: 43%;
+        margin-top: 10;
         font-family: "Lilita One", sans-serif;
         letter-spacing: 8px;
         font-size: 60px;
@@ -24,7 +24,7 @@ div.main-banner {
     > p {
         position: absolute;
         color: white;
-        left: 22.5%;
+        left: 45%;
         top: 50%;
         font-family: "Lilita One", sans-serif;
         letter-spacing: 3px;
